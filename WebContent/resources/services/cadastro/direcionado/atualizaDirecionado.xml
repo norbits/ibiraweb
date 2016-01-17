@@ -1,0 +1,32 @@
+<root servico="alteraDemanda" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="DadosDirecionado" seq=""/>
+ 		</entrada>
+		 <saida>
+			<p item="" tipo="" seq="1"/>
+		</saida>
+</parametros>
+
+<acao seq="1" comando="update" dependencia="0" descricao="insere os dados na tabela" >
+		<reacao objetoUso="DadosDirecionado" table="tdirecionado">
+			<colunas>
+					<column val="oj" nomeColObj="descricao"			nomeColTable="descricao"	utilClass=""  defaultValue=""	/>
+			</colunas>
+			<condicao>
+				<condition>
+					<name depends="" value="id"/>
+					<op depends=""   value="="/>
+					<value val="oj"  value=""   nomeColObj="id"	utilClass="" defaultValue="" dependencia="0:0"/>	
+				</condition>	
+			</condicao>
+			<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+
+		<excecaosecondicao/>
+
+
+</acao>
+
+
+</root>

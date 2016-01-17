@@ -1,0 +1,90 @@
+
+body
+{
+	 background-image: url("/ibiraweb/resources/images/escout2.png");
+background-repeat: no-repeat;
+background-position: center;
+	  
+    background-color: #ffffd7;
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, 
+"Helvetica CE", Verdana, "Verdana CE", sans-serif;
+    color: #200070;  
+    margin: 0px;
+}
+
+h1
+{
+  text-align: center; 
+  color: #200070;
+}
+
+.floatLeft 
+{
+  float: left;
+}
+
+.selCtl 
+{
+  background-color: #C4F4EB; 
+}
+
+
+ .scrolls{
+            width:300px;
+            height:200px;
+            overflow:auto;
+            }
+
+.caminhoPaoText
+{
+font-size:14px;
+color:#47A3FF;
+font-style:italic;
+font-weight:bold;
+}
+
+
+.isentoText
+{
+font-size:16px;
+color:#ff0000;
+font-style:italic;
+font-weight:bold;
+}
+
+
+.textHard
+{
+font-size:14px;
+color:#2E8B57; 
+font-style:italic;
+font-weight:bold;
+}
+
+.caminhoPaoTextBold
+{
+font-size:14px;
+color:#47A3FF;
+font-style:italic;
+font-weight:bold;
+}
+
+.wrap {
+width:1150px; /* largura fict�cia */
+margin:0 auto;
+}
+
+.top {
+ vertical-align: top;
+ }
+
+ .info {
+ height: 102px;
+ overflow: auto;
+ }
+
+
+
+}
+
+

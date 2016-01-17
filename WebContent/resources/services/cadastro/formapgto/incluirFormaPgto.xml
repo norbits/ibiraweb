@@ -1,0 +1,33 @@
+<root servico="incluirDemanda" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="FormaPgto" seq=""/>
+ 		</entrada>
+		 <saida>
+			<p item="" tipo="" seq="1"/>
+		</saida>
+</parametros>
+
+<acao seq="1" comando="insert" dependencia="0" descricao="insere os dados na tabela" >
+		<reacao objetoUso="FormaPgto" table="tformapgto">
+			<colunas>
+					<column val="cl" nomeColObj="id" 			nomeColTable="id" 		utilClass="br.com.utilityes.Utils.getId"  defaultValue="0"/>
+					<column val="oj" nomeColObj="formaPgto" 			nomeColTable="formaPgto"		utilClass=""  defaultValue="" />
+			</colunas>
+			<condicao>
+				<condition>
+					<name depends="" value=""/>
+					<op depends="" value=""/>
+					<value val=""   value=""  nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>	
+			</condicao>
+			<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+
+		<excecaosecondicao/>
+
+
+</acao>
+
+
+</root>

@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="/ibiraweb/portal/menu/TB.css" />
+	<link rel="stylesheet" type="text/css" href="/ibiraweb/css/default.css" />
+	<title>IQUALITY WEB</title>
+
+</h:head>
+
+<f:view>
+	<h:body class="vtr1" style="background-color:#EDEAE7;border:0px;">
+		<h:outputStylesheet>
+			.myWidth 		{width:250px; }
+			.myWidthDescr	{width:450px}
+			
+			.myClass{
+			    color:red;
+			}
+			.corColunaTabela{
+				background-color: #FFE4B5;
+			}
+  		  </h:outputStylesheet>
+
+
+
+		<h:outputScript library="javascript" name="jquery-1.11.2.js" />
+		<h:outputScript library="javascript" name="jquery.maskedinput.min.js" />
+
+
+
+
+
+		<h:form id="primeiroform" style="width: 100%; height:100%">
+		
+			<h:outputScript target="head">
+							function trocaCursor(tipo){  
+								  document.body.style.cursor=tipo;  
+								} 
+			</h:outputScript>
+
+			<h:form>
+				<h:inputHidden value="#{jovensinativoscontroller.init}"></h:inputHidden>
+			</h:form>
+
+
+			<h:form id="incluiDadosescoteiro">
+
+				<rich:panel id="panelproj" style="width: 100%;" border="0">
+					<h:panelGrid border="0">
+						<h:outputText styleClass="caminhoPaoText"
+							value=" Jovens - Inativos " />
+					</h:panelGrid>
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnInclui" errorClass="myClass" />
+					</rich:messages>
+
+					<br />
+					
+					
+					
+					
+					<h:panelGrid border="0" columns="1">
+					
+					
+					
+					
+						<h:panelGroup>
+
+							<rich:extendedDataTable frozenColumns="6"
+								value="#{jovensinativoscontroller.listDadosJoven}" var="proj"
+								selection="#{jovensinativoscontroller.selecao}" id="tableJovens"
+								style="height:260px; width:900px;">
+
+								<a4j:ajax execute="@this" event="selectionchange"
+									listener="#{jovensinativoscontroller.selecaoListener}" />
+									
+								<rich:column width="50px">
+									<f:facet name="header" >
+										<h:outputText value="Re-Ativar" ></h:outputText>
+									</f:facet>
+									<a4j:commandLink styleClass="no-decor" 
+													execute="@this"
+													render="@none" 
+													oncomplete="#{rich:component('confirmPane')}.show();trocaCursor('default')"
+													onclick="trocaCursor('wait', this)">
+										<h:graphicImage value="#{resource['images/ativa.png']}"
+											alt="delete" style="border:none" />
+										<a4j:param value="#{proj.iddadosjovem}"
+											assignTo="#{jovensinativoscontroller.currentJovenOnTable}" />
+									</a4j:commandLink>
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="30px">
+									<f:facet name="header">
+										<h:outputText value="ID" />
+									</f:facet>
+									<h:outputText value="#{proj.iddadosjovem}" />
+								</rich:column>
+
+								<rich:column filterValue="#{carsFilteringBean.secaoFilter}"
+									styleClass="corColunaTabela"
+									filterExpression="#{fn:containsIgnoreCase(proj.idsecao, carsFilteringBean.secaoFilter)}"
+									filterType="custom">
+									<f:facet name="header">
+										<h:panelGroup>
+											<h:outputText value="Seção " />
+											<h:selectOneMenu value="#{carsFilteringBean.secaoFilter}">
+												<f:selectItems value="#{jovensinativoscontroller.secoesOptions}" />
+												<a4j:ajax render=":tableJovens" execute="@this"
+													event="change" />
+											</h:selectOneMenu>
+										</h:panelGroup>
+									</f:facet>
+									<h:outputText value="#{proj.idsecao}" />
+								</rich:column>
+
+								<rich:column sortBy="#{proj.nroFamilia}" 
+									id="timeZone"
+									comparator="#{sortingBean.timeZoneComparator}"
+									sortOrder="#{sortingBean.timeZonesOrder}" 
+									sortType="custom"
+									>
+									<f:facet name="header">
+										<a4j:commandLink 
+										    value="N.Familia" 
+										    render="tableJovens"
+											immediate="true" 
+											action="#{sortingBean.sortByTimeZones}"
+											onclick="trocaCursor('wait', this)"
+											oncomplete="trocaCursor('default')">
+											<f:param name="sortProperty" value="nroFamilia" />
+										</a4j:commandLink>
+
+										<h:graphicImage value="#{resource['images/down_icon.gif']}"
+											rendered="#{sortingBean.sortsOrders['nroFamilia']=='descending'}" />
+										<h:graphicImage value="#{resource['images/up_icon.gif.gif']}"
+											rendered="#{sortingBean.sortsOrders['nroFamilia']=='ascending'}" />
+
+									</f:facet>
+									<h:outputText value="#{proj.nroFamilia}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="70px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Nro. UENB" />
+									</f:facet>
+									<h:outputText value="#{proj.nroRegistro}" />
+								</rich:column>
+
+								<rich:column sortBy="#{proj.nomeJoven}" 
+											headerClass="myWidthId" 
+											width="150px"
+											styleClass="corColunaTabela"
+											id="nomejovemOrder"
+											comparator="#{sortingBean.nomeJovemComparator}"
+											sortOrder="#{sortingBean.nomeJovemOrder}" 
+											sortType="custom">
+										<f:facet name="header">
+										<a4j:commandLink value="Nome Jovem" 
+														 render="tableJovens"
+														 immediate="true" 
+														 action="#{sortingBean.sortByNomeJovem}"
+														 onclick="trocaCursor('wait', this)"
+														 oncomplete="trocaCursor('default')">
+											<f:param name="sortProperty" value="nomeJoven" />
+										</a4j:commandLink>
+
+
+										<h:graphicImage value="#{resource['images/down_icon.gif']}"
+											rendered="#{sortingBean.sortsOrders['nomeJoven']=='descending'}" />
+										<h:graphicImage value="#{resource['images/up_icon.gif.gif']}"
+											rendered="#{sortingBean.sortsOrders['nomeJoven']=='ascending'}" />
+
+									</f:facet>
+									<h:outputText value="#{proj.nomeJoven}" />
+								</rich:column>
+								
+								
+								
+								
+								
+								
+								
+								
+
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="R.G. do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.rgJovem}" />
+								</rich:column>
+
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="C.P.F. do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.cpfJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Dt. Nasc. Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.dtNascJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Cidade Nasc. Jovem" />
+									</f:facet>
+									<h:outputText
+										value="#{proj.cidadeNascJovem} - #{proj.ufNascJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Religião do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.religiaoJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Sexo" />
+									</f:facet>
+									<h:outputText value="#{proj.idsexo}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Celular Jovem" />
+									</f:facet>
+									<h:outputText
+										value="#{proj.precelJovem} - #{proj.telCelularJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Tel.Residenc. Jovem" />
+									</f:facet>
+									<h:outputText
+										value="#{proj.preresJovem} - #{proj.telResidencialJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Email do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.emailJovem}" />
+								</rich:column>
+
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Nome da Mae do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.nomedaMae}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Tel. Comercial da Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.telComercialMae}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Profissão da Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.profissaoMae}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Email da Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.emailMae}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Cidade Nasc. Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.cidadeNascimentoMae}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="R.G. da Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.rgMae}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="C.P.F. da Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.cpfMAE}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Celular da Mãe" />
+									</f:facet>
+									<h:outputText value="#{proj.telCelMae}" />
+								</rich:column>
+
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Nome do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.nomePai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Tel Comerciao do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.telComercialPai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Profissão do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.profissaoPai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Email do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.emailPai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Cid.Nasc. Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.cidadeNasPai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="R.G. do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.rgPai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="C.P.F. do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.cpfPAI}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Cel. do Pai" />
+									</f:facet>
+									<h:outputText value="#{proj.telCelPai}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Endereço do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.enderecoJovem}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Bairro do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.bairro}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Cidade do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.cidade}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Estado do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.estado}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="CEP. do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.cep}" />
+								</rich:column>
+
+								<rich:column headerClass="myWidthId" width="150px"
+									styleClass="corColunaTabela">
+									<f:facet name="header">
+										<h:outputText value="Data Inicio do Jovem" />
+									</f:facet>
+									<h:outputText value="#{proj.dataInicio}" />
+								</rich:column>
+
+
+
+							
+
+
+
+							</rich:extendedDataTable>
+						</h:panelGroup>
+
+						<a4j:jsFunction name="remove"
+							actionListener="#{jovensinativoscontroller.removeJovemOnTable}"
+							render=":tableJovens" execute="@this"
+							oncomplete="#{rich:component('confirmPane')}.hide();" />
+
+
+
+					</h:panelGrid>
+				</rich:panel>
+			</h:form>
+
+		</h:form>
+
+		<h:form id="formMotDeslig">
+			<rich:panel id="panelCinfdesli" style="width: 100%;" border="0">
+				<rich:popupPanel id="confirmPane" modal="true" autosized="true"
+					resizeable="false" domElementAttachment="parent">
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnOK" errorClass="myClass" />
+					</rich:messages>
+
+
+					<h:panelGrid columns="1" border="0">
+						<h:panelGrid border="0">
+							<h:outputText styleClass="caminhoPaoText"
+								value=" Confirma ReAtivação do Jovem ? " />
+						</h:panelGrid>
+
+					</h:panelGrid>
+
+					<br />
+
+					<p>
+
+						<a4j:commandButton value="REATIVAR" id="btnOK"
+							actionListener="#{jovensinativoscontroller.reativaJovemOnTable}"
+							render=":tableJovens :formMotDeslig:motDeslig"
+							execute="confirmPane"
+							onclick="trocaCursor('wait', this)"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('confirmPane')}.hide(); trocaCursor('default');}" />
+
+
+						<a4j:commandButton value="CANCELAR"
+							onclick="#{rich:component('confirmPane')}.hide(); return false;" />
+
+					</p>
+
+
+				</rich:popupPanel>
+			</rich:panel>
+		</h:form>
+	</h:body>
+
+</f:view>
+
+</html>
+

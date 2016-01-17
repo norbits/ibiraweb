@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+     <h:head>
+      <title>ibiraweb</title>
+    </h:head>
+    
+<f:view >  
+<h:body style="background-color:#FBF772">
+<h:form> 
+
+
+<table border="0" style="width:100%; height:100%; font-family:'Arial'" >
+<tr>
+<td align="left" width="20%" >
+ <font color="#0E0E0C"><b>   
+  <h:outputText value="Usuário...:  #{iquality.nomeUser}"> : </h:outputText>
+  </b>
+  <h:outputText value="#{facesContext.externalContext.userPrincipal.name}"> : </h:outputText>
+ </font> 
+</td>
+
+<td align="center" width="60%">
+<table>
+<tr>
+	<td align="center">
+		<font color="#0E0E0C" size="2" >
+			<h:outputText value="#{aprendiz.endereco}"></h:outputText>  
+		</font>
+	</td>
+</tr>
+<tr>
+	<td align="center">
+		<font color="#0E0E0C" size="1">
+			<h:outputText value="#{aprendiz.direitosReservados}"></h:outputText> 
+		</font>
+	</td>
+</tr>
+</table>
+
+</td>
+
+<td align="right" width="20%">
+<table>
+<tr>
+<td align="left">
+<font color="#0E0E0C" size="1">
+ <h:outputText value="#{aprendiz.desenvPor}">  </h:outputText>:  
+ </font>
+</td> 
+</tr>
+<tr>
+<td align="left">
+<font color="#0E0E0C" size="1">
+ <h:outputText value="#{aprendiz.desenvPorTel}">  </h:outputText>:
+ </font>
+</td>  
+ </tr>
+</table> 
+</td>
+
+
+
+
+
+
+</tr>
+
+</table>
+
+
+   				
+
+</h:form>
+</h:body>
+</f:view>
+</html>
+  

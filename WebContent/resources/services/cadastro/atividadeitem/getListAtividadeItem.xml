@@ -1,0 +1,33 @@
+<root servico="incluirDemanda" autoCommit="false" >
+<parametros>
+		<entrada/>
+		 <saida>
+			<p  tipo="oj" item="ibiraweb.bean.AtividadeItem" seq="1"/>
+		</saida>
+</parametros>
+
+
+<acao seq="1" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="tatividadeitem" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="nome" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="valor" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="parcelas" utilClass=""  defaultValue="" > </column>
+					
+			</colunas>
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""      value=""    nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+			<retorno id="0" val="oj" item="" atributo="atividadeList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+</root>

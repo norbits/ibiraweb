@@ -1,0 +1,31 @@
+<root servico="incluirTaxaJuro" autoCommit="false" >
+<parametros>
+			<entrada seq="0">
+			<p id="0" item="tipo" 	tipo="int" 	name="idTaxaJuro"/>
+ 		</entrada>
+		 <saida>
+			<p item="" tipo="" seq="1"/>
+		</saida>
+</parametros>
+
+<acao seq="1" comando="update" dependencia="0" descricao="remove atividade selecionada" >
+		<reacao objetoUso="" table="trecebimento">
+			<colunas>
+				<column val="cl" nomeColObj="" 			nomeColTable="dataDesativado"		utilClass="br.com.utilityes.Datas.getDataHoraAgora"  defaultValue="" />
+			</colunas>
+			<condicao>
+				<condition>
+					<name depends="" value="id"/>
+					<op depends="" value="="/>
+					<value val="dp"  value="" nomeColObj="id"	 utilClass="" defaultValue="" dependencia="0:0"/>	
+				</condition>	
+			</condicao>
+			<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+
+		<excecaosecondicao/>
+
+</acao>
+
+
+</root>

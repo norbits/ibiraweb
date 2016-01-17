@@ -1,0 +1,135 @@
+.fnd1 { 	
+	background-image: url(/imagens/fundoBrad2.gif);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 70px 40px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+
+.fndMenu1 { 	
+	background-color: #F7F7F7;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #333333;
+}
+
+.divMenu1 {
+	left: 12px;
+	width: 100%;
+	position: relative;
+}
+
+.imgMenu1 {
+	cursor: hand;
+}
+
+.txt1 { 	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+}
+
+.txttab1 { 	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+	height=10;
+}
+
+.ttl1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size=13px; 
+	color: #CC0000;
+	font-weight:bold; 
+}
+
+.ttl2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size=13px; 
+	color: #CC0000;
+	font-weight:normal; 
+}
+
+.tab1 {
+	background-color:#f9f9f9;
+}
+
+.ttltab1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size=11px; 
+	color: #FFFFFF;
+	font-weight:bold;
+	background-color:#990000;
+}
+
+.ttltab2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size=11px; 
+	color: #686262;
+	font-weight:bold;
+	background-color:#cecece;
+}
+
+.lnktab1 { 
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 11px;
+	font-weight:normal;
+	text-decoration:none;
+}
+
+.lnk1 { 
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000088;
+	font-size: 11px;
+	text-decoration:none;
+}
+
+.lnk1:hover { 
+	text-decoration:underline;
+}
+
+.lbl1 { 	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+}
+
+.bto1 {	
+
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 10pt; 
+	font-weight: bold; 
+	text-transform: lowercase; 
+	background-color: #FFFFFF; 
+	color: #cc0000; 
+	border-right: #cc0000 1pt solid;
+	border-top: #cc0000 1pt solid;
+	border-left: #cc0000 1pt solid;
+	border-bottom: #cc0000 1pt solid;
+}
+
+.frmTxt1 {	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+}
+
+.frmCmb1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+
+}
+
+.frmLst1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+}
+
+.frmTxtArea1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#333333;
+}

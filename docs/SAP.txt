@@ -1,0 +1,43 @@
+Nome completo:Jose da Silva
+E-mail:jose010180@bol.com.br
+Senha:juni1274
+Dica de senha:omesmo
+
+http://service.sap.com/connectors
+- ID: S0005971512
+- Senha: sap@pira 
+
+
+
+http://ecl.informationbuilders.com/iway/index.jsp?topic=/shell_60/application.adapters/source/topic12.htm
+
+The following is a list of platforms and associated variables. That will be contain the far and jco files:
+AIX
+-> LIBPATH
+
+HP-UX
+-> SHLIB_PATH
+
+Other UNIX Platforms
+-> LD_LIBRARY_PATH
+
+
+Windows
+-> sapjco.jar
+-> sapjcorfc.dll
+-> librfc32.dll
+
+Linux/Solaris/OS400
+-> sapjco.jar
+-> libsapjcorfc.so
+-> librfccm.so
+
+HP-UX
+-> sapjco.jar
+-> librfccm.sl
+-> libsapjcorfc.sl
+
+AIX
+-> sapjco.jar
+-> librfccm.so
+-> libsapjcorfc.so

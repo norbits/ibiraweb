@@ -1,0 +1,42 @@
+<root servico="incluirPlano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="DadosAluno" seq=""/>
+ 		</entrada>
+		 <saida>
+			<p item="" tipo="" seq="1"/>
+		</saida>
+</parametros>
+
+<acao seq="1" comando="insert" dependencia="0" descricao="insere os dados na tabela" >
+		<reacao objetoUso="DadosAluno" table="tdadosaluno">
+			<colunas>
+					<column val="cl" nomeColObj="id" 			nomeColTable="id" 			utilClass="br.com.utilityes.Utils.getId"  defaultValue="0"/>
+					<column val="oj" nomeColObj="cpd"			nomeColTable="cpd"			utilClass=""  defaultValue=""	/>
+					<column val="oj" nomeColObj="nomePai"		nomeColTable="nomePai"		utilClass="br.com.utilityes.Utils.getStringUpper"  defaultValue=""	/>
+					<column val="oj" nomeColObj="nomeMae"		nomeColTable="nomeMae"		utilClass="br.com.utilityes.Utils.getStringUpper"  defaultValue=""	/>
+					<column val="oj" nomeColObj="nomeAluno"		nomeColTable="nomeAluno"	utilClass="br.com.utilityes.Utils.getStringUpper"  defaultValue=""	/>
+					<column val="oj" nomeColObj="dataNascimento"  nomeColTable="dataNascimento"	utilClass=""  defaultValue=""	/>
+					<column val="oj" nomeColObj="cep"			nomeColTable="cep"				utilClass=""  defaultValue=""	/>
+					<column val="oj" nomeColObj="rua"			nomeColTable="rua"				utilClass="br.com.utilityes.Utils.getStringUpper"  defaultValue=""	/>
+					<column val="oj" nomeColObj="numero"		nomeColTable="numero"			utilClass=""  defaultValue=""	/>
+					<column val="oj" nomeColObj="complemento"	nomeColTable="complemento"		utilClass="br.com.utilityes.Utils.getStringUpper"  defaultValue=""	/>
+					<column val="df" nomeColObj="ativo"			nomeColTable="ativo"			utilClass=""  defaultValue="0"	/>
+			</colunas>
+			<condicao> 
+				<condition>
+					<name depends="" value=""/>
+					<op depends="" value=""/>
+					<value val=""    value=""    nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>	
+			</condicao>
+			<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+
+		<excecaosecondicao/>
+
+
+</acao>
+
+
+</root>

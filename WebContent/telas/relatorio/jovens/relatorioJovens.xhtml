@@ -1,0 +1,661 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="/ibiraweb/portal/menu/TB.css" />
+	<link rel="stylesheet" type="text/css" href="/ibiraweb/css/default.css" />
+	<title>IQUALITY WEB</title>
+
+</h:head>
+
+<f:view>
+	<h:body class="vtr1">
+
+		<h:outputStylesheet>
+				.myWidth {width:250px}
+				.myWidthDescr {width:450px}
+				
+				.myClass{
+				    color:red;
+				}
+				
+				.descricao {
+					text-align: left;
+					font-weight: bold;
+					font-size: 14px;
+				}
+				
+				.fonteChamativa{
+					font-weight: 
+					bold;font-size: 14px;
+					color:#FF4500
+				}
+				
+				.corColunaTabelaUEB{
+					background-color: #FFE4B5;
+				}
+				
+				.corColunaTabelaMES1{
+					background-color: #FFBBFF;
+				}
+				
+				.corColunaTabelaMES2{
+					background-color: #D8BFD8;
+				}
+
+    </h:outputStylesheet>
+
+		<h:outputScript library="javascript" name="jquery-1.11.2.js" />
+		<h:outputScript library="javascript" name="jquery.maskedinput.min.js" />
+		<h:outputScript library="javascript" name="jquery-maskmoney.js" />
+
+		<h:outputScript target="head">
+			    $ = jQuery;
+				    $(document).ready(function() {
+				    
+				    $("#secaorelatorioForm\\:ano").mask("9999",{placeholder:" "});
+				    
+				    });
+			</h:outputScript>
+
+
+
+
+		<h:form>
+			<h:inputHidden value="#{relatoriocontroller.init}"></h:inputHidden>
+		</h:form>
+
+		<h:form id="secaorelatorioForm">
+
+			<rich:panel id="panelproj" style="width: 100%;" border="0">
+				<h:panelGrid border="0">
+					<h:outputText styleClass="caminhoPaoText"
+						value=" Relatorio Informativo Devedor/Pagador por Seção" />
+				</h:panelGrid>
+
+				<br />
+
+				<rich:messages errorClass="myClass">
+					<h:message for="btnGera" errorClass="myClass" />
+				</rich:messages>
+
+				<br />
+
+				<h:panelGrid columns="2" border="0">
+
+
+					<h:panelGroup>
+						<h:outputText value="Seção.: " style="font-weight: bold;"
+							for="sub-categoria" />
+						<br />
+						<h:selectOneMenu id="sec" required="true"
+							requiredMessage="O Preenchimento do campo 'Seção' é obrigatório"
+							value="#{relatoriocontroller.dadosJovem.idsecao}"
+							style=" width:160px; ">
+							<f:ajax event="change" render=""
+								listener="#{relatoriocontroller.atualizaValorsecao}" />
+							<f:selectItem itemValue="#{null}" />
+							<f:selectItems value="#{relatoriocontroller.secoes}" var="secao"
+								itemLabel="#{secao.secao}" itemValue="#{secao.id}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+
+					<h:panelGroup>
+						<h:outputText value="Ano Base: " style="font-weight: bold;"
+							for="ano" />
+						<br />
+						<h:inputText id="ano" label="anobase" size="4" maxlength="4"
+							value="#{relatoriocontroller.ano}" required="true"
+							requiredMessage="O Preenchimento do campo 'Ano' é obrigatório">
+						</h:inputText>
+					</h:panelGroup>
+
+					<a4j:commandButton value="Gera Dados" id="btnGera"
+						render=":tableRelatorio :totalContribuicoesPagasValor :totalInscricoesUEBPagasValor :totalDeJovensValor :totalInscricoesUEBNaoPagasValor :totalContribuicoesNaoPagasValor"
+						style="width:105px; height:25px; font-size: 14px" />
+
+					<h:commandLink value="DOWNLOAD - ARQUIVO-Relatório"
+						actionListener="#{relatoriocontroller.geraDadosExcell}" />
+
+				</h:panelGrid>
+
+				<br />
+
+				<h:panelGrid border="0" columns="1" columnClasses="top,top">
+
+					<rich:extendedDataTable
+						value="#{relatoriocontroller.dadosSecaoList}" var="proj"
+						frozenColumns="4" selection="#{financeiroController.selecao}"
+						id="tableRelatorio" style="height:200px; width:850px;">
+
+						<a4j:ajax execute="@this" event="selectionchange"
+							listener="#{relatoriocontroller.selecaoListener}" />
+
+
+						<rich:column headerClass="myWidthId" width="45px">
+							<f:facet name="header">
+								<h:outputText value="Id" />
+							</f:facet>
+							<h:outputText value="#{proj.iddadosjovem}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="45px">
+							<f:facet name="header">
+								<h:outputText value="Nro Familia" />
+							</f:facet>
+							<h:outputText value="#{proj.nroFamilia}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="180px">
+							<f:facet name="header">
+								<h:outputText value="Nome Joven" />
+							</f:facet>
+							<h:outputText value="#{proj.nomeJoven}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px">
+							<f:facet name="header">
+								<h:outputText value="Nro UEB" />
+							</f:facet>
+							<h:outputText value="#{proj.nroRegistro}" />
+						</rich:column>
+
+
+						<!-- UEB -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaUEB">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value=" Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.uebDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaUEB">
+							<f:facet name="header">
+								<h:outputText value="UEB" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.uebValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaUEB">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.uebFormaPaga}" />
+						</rich:column>
+						<!-- JANEIRO -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.janeiroDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="JANEIRO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.janeiroValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.janeiroFormaPaga}" />
+						</rich:column>
+						<!-- FEVEREIRO -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.fevereiroDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="FEVEREIRO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.fevereiroValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.fevereiroFormaPaga}" />
+						</rich:column>
+
+						<!-- MARÇO -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.marcoDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="MARÇO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.marcoValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.marcoFormaPaga}" />
+						</rich:column>
+
+						<!-- Abril -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.abrilDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="ABRIL" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.abrilValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.abrilFormaPaga}" />
+						</rich:column>
+
+						<!-- Maio -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.maioDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="MAIO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.maioValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.maioFormaPaga}" />
+						</rich:column>
+
+						<!-- Junho -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.junhoDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="JUNHO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.junhoValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.junhoFormaPaga}" />
+						</rich:column>
+
+						<!-- Julho -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.julhoDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="JULHO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.julhoValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.julhoFormaPaga}" />
+						</rich:column>
+
+
+						<!-- Agosto -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.agostoDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="AGOSTO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.agostoValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.agostoFormaPaga}" />
+						</rich:column>
+
+
+						<!-- Setembro	 -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.setembroDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="SETEMBRO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.setembroValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.setembroFormaPaga}" />
+						</rich:column>
+
+						<!-- outubro	 -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.outubroDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="OUTUBRO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.outubroValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.outubroFormaPaga}" />
+						</rich:column>
+
+						<!-- novembro	 -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.novembroDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="NOVEMBRO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.novembroValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES1">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.novembroFormaPaga}" />
+						</rich:column>
+
+						<!-- dezembro	 -->
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.dezembroDataPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="DEZEMBRO" />
+								<br />
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.dezembroValorPago}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="80px"
+							styleClass="corColunaTabelaMES2">
+							<f:facet name="header">
+								<h:outputText value="" />
+								<br />
+								<h:outputText value="Forma Pgto	" />
+							</f:facet>
+							<h:outputText value="#{proj.dezembroFormaPaga}" />
+						</rich:column>
+
+
+					</rich:extendedDataTable>
+
+
+				</h:panelGrid>
+
+
+
+
+
+				<table>
+					<tr>
+						<td><h:outputText id="totalDeJovens" label="totalDeJovens"
+								class="caminhoPaoText"
+								value="#{relatoriocontroller.totalDeJovens}" /></td>
+						<td><h:outputText id="totalDeJovensValor"
+								label="totalDeJovensValor" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalDeJovensValor}" /></td>
+
+					</tr>
+
+					<tr>
+						<td><h:outputText id="totalContribuicoesPagas"
+								label="totalContribuicoesPagas" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalContribuicoesPagas}" /></td>
+						<td><h:outputText id="totalContribuicoesPagasValor"
+								label="totalContribuicoesPagasValor" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalContribuicoesPagasValor}" />
+						</td>
+					</tr>
+
+					<tr>
+						<td><h:outputText id="totalInscricoesUEBPagas"
+								label="totalInscricoesUEBPagas" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalInscricoesUEBPagas}" /></td>
+						<td><h:outputText id="totalInscricoesUEBPagasValor"
+								label="totalInscricoesUEBPagasValor" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalInscricoesUEBPagasValor}" />
+						</td>
+					</tr>
+
+					<tr>
+						<td><h:outputText id="totalInscricoesUEBNaoPagas"
+								label="totalInscricoesUEBNaoPagas" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalInscricoesUEBNaoPagas}" /></td>
+						<td><h:outputText id="totalInscricoesUEBNaoPagasValor"
+								label="totalInscricoesUEBNaoPagasValor" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalInscricoesUEBNaoPagasValor}" />
+						</td>
+					</tr>
+
+					<tr>
+						<td><h:outputText id="totalContribuicoesNaoPagas"
+								label="totalContribuicoesNaoPagas" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalContribuicoesNaoPagas}" />
+						</td>
+						<td><h:outputText id="totalContribuicoesNaoPagasValor"
+								label="totalContribuicoesNaoPagasValor" class="caminhoPaoText"
+								value="#{relatoriocontroller.totalContribuicoesNaoPagasValor}" />
+						</td>
+					</tr>
+				</table>
+
+
+			</rich:panel>
+
+		</h:form>
+
+	</h:body>
+
+</f:view>
+
+</html>
+

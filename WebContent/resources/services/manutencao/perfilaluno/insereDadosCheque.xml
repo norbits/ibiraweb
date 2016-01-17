@@ -1,0 +1,39 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="ibiraweb.bean.DadosCheque" 	name="idAluno"/>
+ 		</entrada>
+		 <saida>
+			<p  tipo="" item="" seq="1"/>
+		</saida>
+</parametros>
+
+
+<acao seq="1" comando="insert" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="Recebimento" table=" tdadoscheque " >
+			<colunas>
+					<column val="cl" nomeColObj="id" 				nomeColTable="id" 				utilClass="br.com.utilityes.Utils.getId"  defaultValue="0"/>
+					<column val="oj" nomeColObj="numeroCheque" 	nomeColTable="numeroCheque" 	utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="banco" 		nomeColTable="banco" 		utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="agencia" 		nomeColTable="agencia" 	    utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="conta" 		nomeColTable="conta" 	    utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="nome" 			nomeColTable="nome" 			utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="idDirecionado" 	nomeColTable="idDirecionado" 	utilClass="br.com.utilityes.Utils.getForeinKeyNull"  defaultValue=""/>
+					<column val="oj" nomeColObj="idRecebimento" 	nomeColTable="idRecebimento" 	utilClass="br.com.utilityes.Utils.getForeinKeyNull"  defaultValue=""/>
+					<column val="oj" nomeColObj="valor" 	nomeColTable="valor" 	utilClass=""  defaultValue=""/>
+					<column val="cl" nomeColObj="dataCadastro" 	nomeColTable="dataCadastro" 	utilClass="br.com.utilityes.Datas.getDataHoraAgora"  defaultValue=""/>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name depends="" value=""/>
+					<op depends="" value=""/>
+					<value val=""    value=""  nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>	
+			</condicao>	
+				<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+</root>

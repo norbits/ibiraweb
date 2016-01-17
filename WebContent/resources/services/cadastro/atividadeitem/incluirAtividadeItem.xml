@@ -1,0 +1,35 @@
+<root servico="incluirDemanda" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="Atividade" seq=""/>
+ 		</entrada>
+		 <saida>
+			<p  tipo="" item="" seq="1"/>
+		</saida>
+</parametros>
+
+<acao seq="1" comando="insert" dependencia="0" descricao="insere os dados na tabela" >
+		<reacao objetoUso="AtividadeItem" table="tatividadeitem">
+			<colunas>
+					<column val="cl" nomeColObj="id" 			nomeColTable="id" 		utilClass="br.com.utilityes.Utils.getId"  defaultValue="0"/>
+					<column val="oj" nomeColObj="nome" 			nomeColTable="nome"		utilClass=""  defaultValue="" />
+					<column val="oj" nomeColObj="valor"			nomeColTable="valor"	utilClass=""  defaultValue=""	/>
+					<column val="oj" nomeColObj="parcelas"			nomeColTable="parcelas"	utilClass=""  defaultValue=""	/>
+			</colunas>
+			<condicao>
+				<condition>
+					<name depends="" value=""/>
+					<op depends="" value=""/>
+					<value val=""    value=""  nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>	
+			</condicao>
+			<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+
+		<excecaosecondicao/>
+
+
+</acao>
+
+
+</root>

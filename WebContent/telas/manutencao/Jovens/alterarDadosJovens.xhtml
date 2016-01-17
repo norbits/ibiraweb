@@ -1,0 +1,894 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="/ibiraweb/portal/menu/TB.css" />
+	<link rel="stylesheet" type="text/css" href="/ibiraweb/css/default.css" />
+	<title>IQUALITY WEB</title>
+
+</h:head>
+
+<f:view>
+	<h:body class="vtr1">
+
+		<h:outputStylesheet>
+				.myWidth {width:250px}
+				.myWidthDescr {width:450px}
+				
+				.myClass{
+				    color:red;
+				}
+				
+				.descricao {
+					text-align: left;
+					font-weight: bold;
+					font-size: 14px;
+				}
+				
+				.fonteChamativa{
+					font-weight: 
+					bold;font-size: 14px;
+					color:#FF4500
+				}
+
+    </h:outputStylesheet>
+
+		<h:outputScript library="javascript" name="jquery-1.11.2.js" />
+		<h:outputScript library="javascript" name="jquery.maskedinput.min.js" />
+		<h:outputScript library="javascript" name="jquery-maskmoney.js" />
+
+
+
+
+
+
+		<h:form>
+			<h:inputHidden value="#{alterardadosjovens.init}"></h:inputHidden>
+		</h:form>
+
+		<h:form id="manuteAlteraDados" prependId="false">
+
+
+
+
+			<h:outputScript target="head">
+		
+		
+							function trocaCursor(tipo){  
+								  document.body.style.cursor=tipo;  
+								} 
+			
+			
+						    $ = jQuery;
+							    $(document).ready(function() {
+							    		myFunc();
+							    });
+							    
+							    function myFunc() {
+								      	 $("#numeroFam").mask("?999999",			{placeholder:" "});  
+										 $('#rgJovem').mask("?99.999.999-9",		{placeholder:" "}); 
+										 $("#cpfJovem").mask("?999.999.999-99",	{placeholder:" "}); 
+									     $("#dtNascJovem").mask("9999/99/99",		{placeholder:" "});  
+										 $("#precelJovem").mask("(?99)",			{placeholder:" "});
+										 $("#telCelularJovem").mask("?9999-9999",	{placeholder:" "});
+										 $("#preresJovem").mask("(?99)",			{placeholder:" "});    
+										 $("#telResidencialJovem").mask("?9999-9999",{placeholder:" "});
+										 
+										 $("#rgMae").mask("?99.999.999-9",		{placeholder:" "}); 
+										 $("#cpfMae").mask("?999.999.999-99",			{placeholder:" "});  
+										 $("#telCelularMae").mask("(?99) 9999-9999",{placeholder:" "});
+										 $("#telComercialMae").mask("(?99) 9999-9999",{placeholder:" "});
+										 
+										 $('#rgPai').mask("?9.999.999-9",{placeholder:" "});  
+									   	 $("#cpfPai").mask("?999.999.999-99",{placeholder:" "});
+									  	 $("#telCelularPai").mask("(?99) 9999-9999",{placeholder:" "});
+										 $("#telComercialPai").mask("(?99) 9999-9999",{placeholder:" "});
+										 
+										  $("#cepJovem").mask("99999-999",{placeholder:" "});
+								     
+								     
+								     
+								}
+				    
+			</h:outputScript>
+
+
+
+
+
+
+			<rich:panel id="panelproj" style="width: 100%;" border="0">
+				<h:panelGrid border="0">
+					<h:outputText styleClass="caminhoPaoText"
+						value=" Alteração dos Dados Do Jovem" />
+				</h:panelGrid>
+
+				<rich:messages errorClass="myClass">
+					<h:message for="btnInclui" errorClass="myClass" />
+				</rich:messages>
+
+				<h:panelGrid columns="1" border="0">
+
+					<h:panelGroup>
+
+						<h:panelGrid columns="2" border="0">
+							<h:panelGroup>
+								<a4j:commandButton execute="@this" value="Busca Dados"
+									render=" :manuteFinanceiro:ano "
+									style="width:100px; height:20px; font-size: 14px"
+									id="btnBuscaDados"
+									onclick="#{rich:component('buscaDadosPagamentoJovemPopPup')}.show()" />
+							</h:panelGroup>
+
+
+
+
+							<h:panelGroup>
+								<h:outputText value="Jovem..: " class="descricao"
+									for="nomeDoJovem" />
+
+								<h:outputText id="nomeDoJovem" label="nomeDoJovem" size="50"
+									class="fonteChamativa" maxlength="50"
+									value="#{alterardadosjovens.nomeJovem}" />
+							</h:panelGroup>
+
+						</h:panelGrid>
+
+					</h:panelGroup>
+
+
+
+
+					<h:panelGroup>
+
+						<rich:tabPanel switchType="client" id="richtabPanel"
+							style="height:155px;width:850px;padding-top:5px">
+							<rich:tab header="Dados do Jovens">
+								<h:panelGrid columns="5" border="0">
+									<h:panelGroup>
+										<h:outputText value="Seção.: " style="font-weight: bold;"
+											for="sub-categoria" />
+										<br />
+										<h:selectOneMenu id="sec" required="true"
+											requiredMessage="O Preenchimento do campo 'Seção' é obrigatório"
+											value="#{alterardadosjovens.dadosJovem.idsecao}"
+											style=" width:160px; ">
+											<f:ajax event="change" render=""
+												listener="#{alterardadosjovens.atualizaValorsecao}" />
+											<f:selectItem itemValue="#{null}" />
+											<f:selectItems value="#{alterardadosjovens.secoes}"
+												var="secao" itemLabel="#{secao.secao}"
+												itemValue="#{secao.id}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+
+
+									<h:panelGroup >
+										<h:outputText value="Check Para Isentar"
+											style="font-weight: bold;" for="numeroFam" />
+										<br />
+										 <h:selectBooleanCheckbox value="#{alterardadosjovens.dadosJovem.isentoDisplay}" >
+				                    </h:selectBooleanCheckbox>
+
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Nro. Familia: "
+											style="font-weight: bold;" for="numeroFam" />
+										<br />
+										<h:inputText id="numeroFam" label="numeroFam" size="6"
+											maxlength="6"
+											value="#{alterardadosjovens.dadosJovem.nroFamilia}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Numero Família' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Nome: " style="font-weight: bold;"
+											for="nomeJovem" />
+										<br />
+										<h:inputText id="nomeJovem" label="nomeJovem" size="25"
+											maxlength="50"
+											value="#{alterardadosjovens.dadosJovem.nomeJoven}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Nome' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>
+
+
+									<h:panelGrid columns="2" border="0">
+										<h:panelGroup>
+												<h:outputText value="Nro. UEB: " style="font-weight: bold;"
+													for="nroUEB" />
+												<br />
+												<h:inputText id="nroUEB" label="nroUEB" size="10"
+													maxlength="10"
+													value="#{alterardadosjovens.dadosJovem.nroRegistro}"
+													required="true"
+													requiredMessage="O Preenchimento do campo 'Nro. UEB' é obrigatório">
+												</h:inputText>
+										</h:panelGroup>
+										<h:panelGroup>
+												<h:outputText value="Check Torna Inativo"
+													style="font-weight: bold;" for="numeroFam" />
+												<br />
+												 <h:selectBooleanCheckbox 
+												 	id="idInativar"
+												 	value="#{alterardadosjovens.dadosJovem.inativar}" 
+												 	onclick="#{rich:component('confirmPane')}.show()">
+						                      </h:selectBooleanCheckbox>
+										</h:panelGroup>
+									</h:panelGrid>
+
+
+
+
+
+
+									<h:panelGroup>
+										<h:outputText value="R. G. " style="font-weight: bold;"
+											for="rgJovem" />
+										<br />
+										<h:inputText id="rgJovem" label="rgJovem" size="9"
+											maxlength="9"
+											value="#{alterardadosjovens.dadosJovem.rgJovem}"
+											required="false">
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="C.P.F. " style="font-weight: bold;"
+											for="cpfJovem" />
+										<br />
+										<h:inputText id="cpfJovem" label="cpfJovem" size="11"
+											maxlength="11"
+											value="#{alterardadosjovens.dadosJovem.cpfJovem}"
+											required="false">
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Data Nascimento: "
+											style="font-weight: bold;" for="dtNascJovem" />
+										<br />
+										<h:inputText id="dtNascJovem" label="dtNascJovem" size="8"
+											maxlength="8"
+											value="#{alterardadosjovens.dadosJovem.dtNascJovem}"
+											required="false">
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Cidade Nascim."
+											style="font-weight: bold;" for="cidadeNasc" />
+										<br />
+										<h:inputText id="cidadeNasc" label="cidadeNasc" size="20"
+											maxlength="20"
+											value="#{alterardadosjovens.dadosJovem.cidadeNascJovem}"
+											required="false">
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="U.F. " style="font-weight: bold;"
+											for="cidadeNascUf" />
+										<br />
+										<h:inputText id="cidadeNascUf" label="cidadeNascUf" size="2"
+											maxlength="2"
+											value="#{alterardadosjovens.dadosJovem.ufNascJovem}"
+											required="false">
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Religião: " style="font-weight: bold;"
+											for="religiao" />
+										<br />
+										<h:inputText id="religiao" label="religiao" size="20"
+											maxlength="20"
+											value="#{alterardadosjovens.dadosJovem.religiaoJovem}"
+											required="false">
+										</h:inputText>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Sexo.: " style="font-weight: bold;"
+											for="sub-categoria" />
+										<br />
+										<h:selectOneMenu id="sexo"
+											value="#{alterardadosjovens.dadosJovem.idsexo}"
+											style=" width:100px; " required="true"
+											requiredMessage="O Preenchimento do campo 'Sexo' é obrigatório">
+											<f:ajax event="change" render=""
+												listener="#{alterardadosjovens.atualizaValorsecao}" />
+											<f:selectItem itemValue="#{null}" />
+											<f:selectItems value="#{alterardadosjovens.sexoData}"
+												var="sx" itemLabel="#{sx.descricao}" itemValue="#{sx.id}" />
+										</h:selectOneMenu>
+									</h:panelGroup>
+
+
+									<h:panelGroup>
+										<h:outputText value="Telef. Celuar: "
+											style="font-weight: bold;" for="precelJovem" />
+										<h:panelGrid columns="2" border="0">
+											<h:inputText id="precelJovem" label="precelJovem" size="2"
+												maxlength="2"
+												value="#{alterardadosjovens.dadosJovem.precelJovem}"
+												required="false">
+											</h:inputText>
+											<h:inputText id="telCelularJovem" label="telCelularJovem"
+												size="10" maxlength="10"
+												value="#{alterardadosjovens.dadosJovem.telCelularJovem}"
+												required="false">
+											</h:inputText>
+										</h:panelGrid>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Telef. Residencial "
+											style="font-weight: bold;" for="telResidencial" />
+										<br />
+										<h:panelGrid columns="2" border="0">
+											<h:inputText id="preresJovem" label="preresJovem" size="2"
+												maxlength="2"
+												value="#{alterardadosjovens.dadosJovem.preresJovem}"
+												required="false">
+											</h:inputText>
+											<h:inputText id="telResidencialJovem"
+												label="telResidencialJovem" size="10" maxlength="10"
+												value="#{alterardadosjovens.dadosJovem.telResidencialJovem}"
+												required="false">
+											</h:inputText>
+										</h:panelGrid>
+									</h:panelGroup>
+
+									<h:panelGroup>
+										<h:outputText value="Email: " style="font-weight: bold;"
+											for="emailJovem" />
+										<br />
+										<h:inputText id="emailJovem" label="emailJovem" size="35"
+											maxlength="100"
+											value="#{alterardadosjovens.dadosJovem.emailJovem}"
+											required="false">
+										</h:inputText>
+
+
+
+
+									</h:panelGroup>
+
+								</h:panelGrid>
+
+							</rich:tab>
+
+							<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+							<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+							<rich:tab header="Dados da Mãe">
+								<!--	<h:panelGrid border="0">
+										<h:outputText styleClass="caminhoPaoText"
+											value=" Dados da Mãe" />
+									</h:panelGrid> -->
+								<h:panelGrid border="0" columns="1">
+									<h:panelGrid columns="4" border="0">
+										<h:panelGroup>
+											<h:outputText value="Nome Mãe: " style="font-weight: bold;"
+												for="nomeMae" />
+											<br />
+											<h:inputText id="nomeMae" label="nomeMae" size="30"
+												maxlength="50"
+												value="#{alterardadosjovens.dadosJovem.nomedaMae}"
+												required="false"
+												requiredMessage="O Preenchimento do campo Nome é obrigatório">
+												<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Telef. Comercial "
+												style="font-weight: bold;" for="telComercialMae" />
+											<br />
+											<h:inputText id="telComercialMae" label="telComercialMae"
+												size="10" maxlength="10"
+												value="#{alterardadosjovens.dadosJovem.telComercialMae}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Profissão" style="font-weight: bold;"
+												for="profissaoMae" />
+											<br />
+											<h:inputText id="profissaoMae" label="profissaoMae" size="20"
+												maxlength="40"
+												value="#{alterardadosjovens.dadosJovem.profissaoMae}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+
+										<h:panelGroup>
+											<h:outputText value="Email: " style="font-weight: bold;"
+												for="emailMae" />
+											<br />
+											<h:inputText id="emailMae" label="emailMae" size="35"
+												maxlength="100"
+												value="#{alterardadosjovens.dadosJovem.emailMae}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Cidade Nascimento"
+												style="font-weight: bold;" for="cidadeNascimentMae" />
+											<br />
+											<h:inputText id="cidadeNascimentMae"
+												label="cidadeNascimentMae" size="30" maxlength="30"
+												value="#{alterardadosjovens.dadosJovem.cidadeNascimentoMae}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="R. G. " style="font-weight: bold;"
+												for="rgMae" />
+											<br />
+											<h:inputText id="rgMae" label="rgMae" size="9" maxlength="9"
+												value="#{alterardadosjovens.dadosJovem.rgMae}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="C.P.F. " style="font-weight: bold;"
+												for="cpfMae" />
+											<br />
+											<h:inputText id="cpfMae" label="cpfMae" size="9"
+												maxlength="9"
+												value="#{alterardadosjovens.dadosJovem.cpfMAE}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+
+										<h:panelGroup>
+											<h:outputText value="Telef. Celuar: "
+												style="font-weight: bold;" for="telCelularMae" />
+											<br />
+											<h:inputText id="telCelularMae" label="telCelularMae"
+												size="15" maxlength="15"
+												value="#{alterardadosjovens.dadosJovem.telCelMae}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+									</h:panelGrid>
+								</h:panelGrid>
+							</rich:tab>
+							<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+							<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+							<rich:tab header="Dados da Pai">
+
+								<!--	<h:panelGrid border="0">
+										<h:outputText styleClass="caminhoPaoText"
+											value=" Dados da Pai" />
+									</h:panelGrid>-->
+								<h:panelGrid border="0" columns="1">
+									<h:panelGrid columns="4" border="0">
+										<h:panelGroup>
+											<h:outputText value="Nome Pai: " style="font-weight: bold;"
+												for="nomePai" />
+											<br />
+											<h:inputText id="nomePai" label="nomePai" size="30"
+												maxlength="50"
+												value="#{alterardadosjovens.dadosJovem.nomePai}"
+												required="false"
+												requiredMessage="O Preenchimento do campo Nome é obrigatório">
+												<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Telef. Comercial "
+												style="font-weight: bold;" for="telComercialPai" />
+											<br />
+											<h:inputText id="telComercialPai" label="telComercialPai"
+												size="10" maxlength="10"
+												value="#{alterardadosjovens.dadosJovem.telComercialPai}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Profissão" style="font-weight: bold;"
+												for="profissaoPai" />
+											<br />
+											<h:inputText id="profissaoPai" label="profissaoPai" size="20"
+												maxlength="40"
+												value="#{alterardadosjovens.dadosJovem.profissaoPai}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Email: " style="font-weight: bold;"
+												for="emailPai" />
+											<br />
+											<h:inputText id="emailPai" label="emailPai" size="35"
+												maxlength="100"
+												value="#{alterardadosjovens.dadosJovem.emailPai}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Cidade Nascimento"
+												style="font-weight: bold;" for="cidadeNascimentPai" />
+											<br />
+											<h:inputText id="cidadeNascimentPai"
+												label="cidadeNascimentPai" size="20" maxlength="20"
+												value="#{alterardadosjovens.dadosJovem.cidadeNasPai}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+
+
+										<h:panelGroup>
+											<h:outputText value="R. G. " style="font-weight: bold;"
+												for="rgPai" />
+											<br />
+											<h:inputText id="rgPai" label="rgPai" size="9" maxlength="9"
+												value="#{alterardadosjovens.dadosJovem.rgPai}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="C.P.F. " style="font-weight: bold;"
+												for="cpfPai" />
+											<br />
+											<h:inputText id="cpfPai" label="cpfPai" size="9"
+												maxlength="9"
+												value="#{alterardadosjovens.dadosJovem.cpfPAI}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Telef. Celuar: "
+												style="font-weight: bold;" for="telCelularPai" />
+											<br />
+											<h:inputText id="telCelularPai" label="telCelularPai"
+												size="15" maxlength="15"
+												value="#{alterardadosjovens.dadosJovem.telCelPai}"
+												required="false">
+											</h:inputText>
+										</h:panelGroup>
+
+									</h:panelGrid>
+								</h:panelGrid>
+							</rich:tab>
+							<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+							<!--  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+
+
+							<rich:tab header="Endereço Jovem">
+								<!--<h:panelGrid border="0">
+										<h:outputText styleClass="caminhoPaoText" value=" Endereço " />
+									</h:panelGrid>-->
+								<h:panelGrid border="0" columns="1">
+									<h:panelGrid columns="2" border="0">
+
+										<h:panelGroup>
+											<h:outputText value="C.E.P.: " style="font-weight: bold;"
+												for="cepJovem" />
+											<br />
+											<h:inputText id="cepJovem" label="cepJovem" size="10"
+												maxlength="10" value="#{alterardadosjovens.dadosJovem.cep}"
+												required="false"
+												requiredMessage="O Preenchimento do campo Nome é obrigatório">
+												<f:ajax event="change" render="cepJovem" />
+											</h:inputText>
+
+											<a4j:commandButton value="(O)" id="btnCepFind"
+												actionListener="#{alterardadosjovens.findByCep}"
+												onclick="trocaCursor('wait', this)"
+												oncomplete="trocaCursor('default')"
+												render=":enderecoJovem :bairroJovem :cidadejvem :estadoJovem"
+												execute="@this"></a4j:commandButton>
+
+
+
+										</h:panelGroup>
+
+
+
+
+
+										<h:panelGroup>
+											<h:outputText value="Endereco: " style="font-weight: bold;"
+												for="enderecoJovem" />
+											<br />
+											<h:inputText id="enderecoJovem" label="enderecoJovem"
+												size="50" maxlength="100"
+												value="#{alterardadosjovens.dadosJovem.enderecoJovem}"
+												required="false"
+												requiredMessage="O Preenchimento do campo Nome é obrigatório">
+												<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Bairro: " style="font-weight: bold;"
+												for="bairroJovem" />
+											<br />
+											<h:inputText id="bairroJovem" label="bairroJovem" size="30"
+												maxlength="50"
+												value="#{alterardadosjovens.dadosJovem.bairro}"
+												required="false"
+												requiredMessage="O Preenchimento do campo Nome é obrigatório">
+												<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:panelGroup>
+												<h:outputText value="Cidade: " style="font-weight: bold;"
+													for="cidadejvem" />
+												<br />
+												<h:inputText id="cidadejvem" label="cidadejvem" size="30"
+													maxlength="50"
+													value="#{alterardadosjovens.dadosJovem.cidade}"
+													required="false"
+													requiredMessage="O Preenchimento do campo Nome é obrigatório">
+													<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+												</h:inputText>
+											</h:panelGroup>
+
+											<h:panelGroup>
+												<h:outputText value="UF " style="font-weight: bold;"
+													for="estadoJovem" />
+												<h:inputText id="estadoJovem" label="estadoJovem" size="2"
+													maxlength="2"
+													value="#{alterardadosjovens.dadosJovem.estado}"
+													required="false"
+													requiredMessage="O Preenchimento do campo Nome é obrigatório">
+													<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+												</h:inputText>
+											</h:panelGroup>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Número: " style="font-weight: bold;"
+												for="numeroResidencia" />
+											<br />
+											<h:inputText id="numeroResidencia" label="numeroResidencia"
+												size="10" maxlength="10"
+												value="#{alterardadosjovens.dadosJovem.numeroResidencia}"
+												required="false"
+												requiredMessage="O Preenchimento do campo numeroResidencia é obrigatório">
+
+											</h:inputText>
+										</h:panelGroup>
+
+										<h:panelGroup>
+											<h:outputText value="Complemento: "
+												style="font-weight: bold;" for="complementoEndereco" />
+											<br />
+											<h:inputText id="complementoEndereco"
+												label="complementoEndereco" size="50" maxlength="100"
+												value="#{alterardadosjovens.dadosJovem.complementoEndereco}"
+												required="false"
+												requiredMessage="O Preenchimento do campo Nome é obrigatório">
+
+											</h:inputText>
+										</h:panelGroup>
+
+									</h:panelGrid>
+								</h:panelGrid>
+
+							</rich:tab>
+						</rich:tabPanel>
+					</h:panelGroup>
+
+					<a4j:commandButton value="Confirmar Alteração"
+								actionListener="#{alterardadosjovens.alteraDadosJoven}"
+								onclick="trocaCursor('wait', this)"
+								oncomplete="trocaCursor('default')"
+								id="btnInclui" 
+								render=":manuteAlteraDados :nomeDoJovem"
+								style="width:155px; height:30px; font-size: 14px" />
+
+
+
+				</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</rich:panel>
+
+			<rich:panel id="panelproj2" style="width: 100%;" border="0">
+
+
+
+				<rich:popupPanel id="buscaDadosPagamentoJovemPopPup" modal="true"
+					autosized="true" resizeable="false" domElementAttachment="parent">
+
+
+					<f:facet name="header">
+						<h:outputText value="Busca Dados de Pagamento do Jovem" />
+					</f:facet>
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnOK2" errorClass="myClass" />
+					</rich:messages>
+
+					<h:panelGrid columns="1" border="0">
+						<h:panelGroup>
+							<a4j:jsFunction name="buscarIdJovem" execute="buscarNomeJovem"
+								action="#{alterardadosjovens.popularIdSindicoGeral}"
+								render="       :buscarNomeJovem :numfamiliafin :idJovemSelecionado" />
+
+
+							<h:outputLabel value="Nome do Jovem:" style="font-weight: bold;"
+								for="buscarNomeJovem" />
+							<br />
+							<rich:autocomplete id="buscarNomeJovem"
+								autocompleteMethod="#{alterardadosjovens.buscarListaJovem}"
+								var="jov" minChars="1" onselectitem="buscarIdJovem()"
+								layout="table" fetchValue="#{jov.iddadosjovem}"
+								value="#{alterardadosjovens.nomeJovemSelectAutoComplete}"
+								required="false" label="Nome do Jovem"
+								requiredMessage="O Preenchimento do campo 'Nome do Jovem' é obrigatório">
+								<rich:column>   #{jov.nroFamilia}  </rich:column>
+								<rich:column>    - </rich:column>
+								<rich:column>    #{jov.nomeJoven}  </rich:column>
+							</rich:autocomplete>
+						</h:panelGroup>
+
+
+						<h:panelGroup>
+							<h:outputText value="Nro. Família.: " style="font-weight: bold;"
+								for="numfamiliafin" />
+							<br />
+							<h:selectOneMenu id="numfamiliafin"
+								value="#{alterardadosjovens.nroFamiliaCorrentSelected}"
+								valueChangeListener="#{alterardadosjovens.valueChanged}"
+								style=" width:200px; ">
+								<f:selectItem itemValue="#{null}" />
+								<f:selectItems
+									value="#{alterardadosjovens.nroFamiliaListselectItem}" />
+								<a4j:ajax event="valueChange"
+									render=":numfamiliafin :buscarNomeJovem" execute="@this" />
+							</h:selectOneMenu>
+
+						</h:panelGroup>
+
+
+					</h:panelGrid>
+
+
+
+
+					<p>
+
+						<a4j:commandButton value="OK" id="btnOK2"
+							actionListener="#{alterardadosjovens.buscaDados}"
+							render=":manuteAlteraDados :nomeDoJovem "
+							execute="buscaDadosPagamentoJovemPopPup"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('buscaDadosPagamentoJovemPopPup')}.hide();  myFunc(); }" />
+
+						<a4j:commandButton value="Cancel"
+							onclick="#{rich:component('buscaDadosPagamentoJovemPopPup')}.hide(); return false;" />
+
+						<a4j:commandButton value="Limpar" id="btnLimpar"
+							actionListener="#{alterardadosjovens.limpaBuscarDadsJovem}"
+							render=":numfamiliafin :buscarNomeJovem"
+							execute="buscaDadosPagamentoJovemPopPup">
+						</a4j:commandButton>
+					</p>
+
+				</rich:popupPanel>
+
+
+			</rich:panel>
+
+		</h:form>
+
+<h:form id="formMotDeslig">
+			<rich:panel id="panelCinfdesli" style="width: 100%;" border="0">
+				<rich:popupPanel id="confirmPane" modal="true" autosized="true"
+					resizeable="false" domElementAttachment="parent">
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnOK" errorClass="myClass" />
+					</rich:messages>
+
+
+					<h:panelGrid columns="1" border="0">
+						<h:panelGrid border="0">
+							<h:outputText styleClass="caminhoPaoText"
+								value=" Confirma Desligar o Jovem ? " />
+						</h:panelGrid>
+
+						<h:panelGroup>
+							<br />
+							<h:outputText value="Motivo Desligamento: "
+								style="font-weight: bold;" for="motDeslig" />
+							<br />
+							<h:inputText id="motDeslig" label="motDeslig" size="30"
+								maxlength="60" value="#{alterardadosjovens.dadosJovem.motDesligamento}"
+								required="true" rendered="true"
+								requiredMessage="O Preenchimento do campo 'Motivo Desligamento' é Obrigatório">
+							</h:inputText>
+						</h:panelGroup>
+
+					</h:panelGrid>
+
+					<br />
+
+					<p>
+
+						<a4j:commandButton value="OK" id="btnOK"
+							execute="confirmPane"
+							immediate="true"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('confirmPane')}.hide();}" />
+
+
+						<a4j:commandButton value="CANCELAR" 
+						    id="btnOKCanc"
+							actionListener="#{alterardadosjovens.inativarFalse}"
+							execute="confirmPane"
+							render="richtabPanel" 
+							immediate="true"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('confirmPane')}.hide();}"/>
+
+					</p>
+
+
+				</rich:popupPanel>
+			</rich:panel>
+		</h:form>
+
+		<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+		<h:form id="buscaDadosPagamentoJovemForm">
+
+
+
+
+		</h:form>
+
+
+
+
+	</h:body>
+
+</f:view>
+
+</html>
+

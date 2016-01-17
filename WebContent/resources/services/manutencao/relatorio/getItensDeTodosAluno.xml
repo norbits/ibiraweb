@@ -1,0 +1,238 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="ibiraweb.bean.DadosAluno" 	name=""/>
+ 		</entrada>
+ 		
+		 <saida>
+			<p  tipo="oj" item="ibiraweb.bean.CombosPerfilAluno" seq="1:2"/>
+		</saida>
+</parametros>
+
+ 
+
+
+<acao seq="1" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table=" trecebimento tr left JOIN tdadoscheque tdc on tdc.idRecebimento = tr.id, tcondicaoatividadeitem tcai, tatividadeitem tai, tformapgto tfp , tdadosaluno tda" >
+			<colunas>
+			        <column id="0" val="tb" nomeColObj="null" nomeColTable="tda.cpd" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="tda.nomeAluno" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="tcai.id" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="tai.nome" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="tb" nomeColObj="null" nomeColTable="tfp.formaPgto" utilClass=""  defaultValue="" > </column>
+					<column id="5" val="tb" nomeColObj="null" nomeColTable="tcai.valor" utilClass=""  defaultValue="" > </column>
+					<column id="6" val="tb" nomeColObj="null" nomeColTable="tai.parcelas" utilClass=""  defaultValue="" > </column>
+					<column id="7" val="df" nomeColObj="null" nomeColTable="'false' isDelete" utilClass=""  defaultValue="" > </column>
+					<column id="8" val="df" nomeColObj="null" nomeColTable="(select tr1.valor from trecebimento tr1 where tr1.id = tr.id)" utilClass=""  defaultValue="" > </column>
+					<column id="9" val="df" nomeColObj="null" nomeColTable="(SELECT tcai.valor-ifnull(sum(valor),0) FROM trecebimento tr where tr.idCondAtivItem = tcai.id and tr.dataDesativado is null) faltaReceber " utilClass=""  defaultValue="" > </column>
+					<column id="10" val="df" nomeColObj="null" nomeColTable="tr.dataRecebimento" utilClass=""  defaultValue="" > </column>
+					
+					<column id="11" val="df" nomeColObj="null" nomeColTable="tdc.numeroCheque " utilClass=""  defaultValue="" > </column>
+					<column id="12" val="df" nomeColObj="null" nomeColTable="tdc.banco" utilClass=""  defaultValue="" > </column>
+					<column id="13" val="df" nomeColObj="null" nomeColTable="tdc.agencia" utilClass=""  defaultValue="" > </column>
+					<column id="14" val="df" nomeColObj="null" nomeColTable="tdc.conta" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				 <condition>
+					<name 	depends="" 	value="tda.cpd" />
+					<op 	depends="" 	value="=" />
+					<value val="dp"     value=""        nomeColObj="cpd"	 utilClass=""  defaultValue="tda.cpd" dependencia="0:0"/>
+				</condition>
+				
+				 <condition>
+					<name 	depends="" 	value="tda.nomeAluno" />
+					<op 	depends="" 	value=" like " />
+					<value val="dp"     value=""        nomeColObj="nomeAluno"	 utilClass=""  defaultValue="tda.nomeAluno" dependencia="0:0"/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tcai.idatividadeitem" />
+					<op 	depends="" 	value="=" />
+					<value val="dp"     value=""        nomeColObj="idReferente"	 utilClass=""  defaultValue="tcai.idatividadeitem" dependencia="0:0"/>
+				</condition>
+					<!-- Ganbiarra pra fazer funcionar  -->
+				<condition>
+					<name 	depends="" 	value="tr.idformapgto" />
+					<op 	depends="" 	value="=" />
+					<value val="dp"     value=""      nomeColObj="idFormaPgto"	 utilClass=""  defaultValue="tr.idformapgto" dependencia="0:0"/>
+				</condition>
+					<!-- Ganbiarra pra fazer funcionar  -->
+				<condition>
+					<name 	depends="" 	value="tr.dataRecebimento " />
+					<op 	depends="" 	value=" &gt;= " />
+					<value val="dp"     value=""      nomeColObj="dataRecebimentoDe"	 utilClass=""  defaultValue="'2001-02-10 00:00:00'" dependencia="0:0"/>
+				</condition>
+					<!-- Ganbiarra pra fazer funcionar  -->
+				<condition>
+					<name 	depends="" 	value="tr.dataRecebimento " />
+					<op 	depends="" 	value=" &lt;= " />
+					<value val="dp"     value=""      nomeColObj="dataRecebimentoAte"	 utilClass=""  defaultValue="'2101-02-10 00:00:00'" dependencia="0:0"/>
+				</condition>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<condition>
+					<name 	depends="" 	value="tcai.idaluno" />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tda.id"  nomeColObj=""	 utilClass=""  defaultValue="tda.id" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tcai.idatividadeitem" />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tai.id"  nomeColObj=""	 utilClass=""  defaultValue="tai.id" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tr.idformapgto" />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tfp.id"      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tcai.datatermino " />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tr.idCondAtivItem " />
+					<op 	depends="" 	value=" = " />
+					<value val="ct"     value="tcai.id"      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tr.dataDesativado " />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				
+				
+				
+				
+			</condicao>	
+				<retorno id="0" val="oj" item="" atributo="condicaoAtividadeitensList" utiliza="" utilClass=""  defaultValue="" />
+				</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+<acao seq="2" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table=" trecebimento tr left JOIN tdadoscheque tdc on tdc.idRecebimento = tr.id, tcondicaoplano tcp, tplano tp, tformapgto tfp, tdadosaluno tda " >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="tda.cpd" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="tda.nomeAluno" utilClass=""  defaultValue="" > </column>
+			        <column id="2" val="tb" nomeColObj="null" nomeColTable="tcp.id" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="tp.nomePlano" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="tb" nomeColObj="null" nomeColTable="tfp.formaPgto" utilClass=""  defaultValue="" > </column>
+					<column id="5" val="tb" nomeColObj="null" nomeColTable="tcp.valor" utilClass=""  defaultValue="" > </column>
+					<column id="6" val="tb" nomeColObj="null" nomeColTable="tp.parcelas" utilClass=""  defaultValue="" > </column>
+					<column id="7" val="df" nomeColObj="null" nomeColTable="'true' isDelete" utilClass=""  defaultValue="" > </column>
+					<column id="8" val="df" nomeColObj="null" nomeColTable="(select tr1.valor from trecebimento tr1 where tr1.id = tr.id)" utilClass=""  defaultValue="" > </column>
+					<column id="9" val="df" nomeColObj="null" nomeColTable="(SELECT tcp.valor-ifnull(sum(valor),0) FROM trecebimento tr where tr.idCondPlano = tcp.id and tr.dataDesativado is null) faltaReceber " utilClass=""  defaultValue="" > </column>
+					<column id="10" val="df" nomeColObj="null" nomeColTable="tr.dataRecebimento" utilClass=""  defaultValue="" > </column>
+					
+					<column id="11" val="df" nomeColObj="null" nomeColTable="tdc.numeroCheque " utilClass=""  defaultValue="" > </column>
+					<column id="12" val="df" nomeColObj="null" nomeColTable="tdc.banco" utilClass=""  defaultValue="" > </column>
+					<column id="13" val="df" nomeColObj="null" nomeColTable="tdc.agencia" utilClass=""  defaultValue="" > </column>
+					<column id="14" val="df" nomeColObj="null" nomeColTable="tdc.conta" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				 <condition>
+					<name 	depends="" 	value="tda.cpd" />
+					<op 	depends="" 	value="=" />
+					<value val="dp" 	value=""  nomeColObj="cpd"	 utilClass=""  defaultValue="tda.cpd" dependencia="0:0"/>
+				</condition>
+				
+				 <condition>
+					<name 	depends="" 	value="tda.nomeAluno" />
+					<op 	depends="" 	value=" like " />
+					<value val="dp"     value=""        nomeColObj="nomeAluno"	 utilClass=""  defaultValue="tda.nomeAluno" dependencia="0:0"/>
+				</condition>
+				
+				<!-- Ganbiarra pra fazer funcionar  -->
+				 <condition>
+					<name 	depends="" 	value="tfp.id" />
+					<op 	depends="" 	value="=" />
+					<value val="dp" 	value=""  nomeColObj="idReferente"	 utilClass=""  defaultValue="tfp.id" dependencia="0:0"/>
+				</condition>
+				<!-- Ganbiarra pra fazer funcionar  -->
+				<condition>
+					<name 	depends="" 	value="tr.idformapgto" />
+					<op 	depends="" 	value="=" />
+					<value val="dp"     value=""      nomeColObj="idFormaPgto"	 utilClass=""  defaultValue="tr.idformapgto" dependencia="0:0"/>
+				</condition>
+					<!-- Ganbiarra pra fazer funcionar  -->				 
+				<condition>
+					<name 	depends="" 	value="tr.dataRecebimento " />
+					<op 	depends="" 	value=" &gt;= " />
+					<value val="dp"     value=""      nomeColObj="dataRecebimentoDe"	 utilClass=""  defaultValue="'2001-02-10 00:00:00'" dependencia="0:0"/>
+				</condition>
+					<!-- Ganbiarra pra fazer funcionar  -->
+				<condition>
+					<name 	depends="" 	value="tr.dataRecebimento " />
+					<op 	depends="" 	value=" &lt;= " />
+					<value val="dp"     value=""      nomeColObj="dataRecebimentoAte"	 utilClass=""  defaultValue="'2101-02-10 00:00:00'" dependencia="0:0"/>
+				</condition>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
+				<condition>
+					<name 	depends="" 	value="tcp.idaluno" />
+					<op 	depends="" 	value="=" />
+					<value val="ct" 	value="tda.id"  nomeColObj=""	 utilClass=""  defaultValue="0" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tcp.idplano " />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tp.id"       nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tr.idformapgto " />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tfp.id"      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tcp.datatermino " />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value=" tr.idCondPlano " />
+					<op 	depends="" 	value=" = " />
+					<value val="ct"     value="tcp.id "      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tr.dataDesativado " />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				
+			</condicao>	
+				<retorno id="0" val="oj" item="" atributo="condicaoPlanoList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+ 
+
+
+</root>

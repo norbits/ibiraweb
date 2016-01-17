@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+
+
+
+
+	<navigation-rule>
+		<from-view-id>telas/manutencao/perfilaluno/listaAlunosAtivos.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>manutencaoPerfilAluno</from-outcome>
+			<to-view-id>telas/manutencao/perfilaluno/manutencaoPerfilAluno.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+	<navigation-rule>
+		<from-view-id>telas/manutencao/relatorio/listaAlunosAtivosRel.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>relatorioAlunoRel</from-outcome>
+			<to-view-id>telas/manutencao/relatorio/relatorioAReceberAluno.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+<navigation-rule>
+		<from-view-id>telas/manutencao/relatorio/relatorioAReceberAluno.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>voltaRelatorioAlunoRel</from-outcome>
+			<to-view-id>telas/manutencao/relatorio/listaAlunosAtivosRel.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</faces-config>

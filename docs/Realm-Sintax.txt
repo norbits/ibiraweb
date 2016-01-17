@@ -1,0 +1,41 @@
+
+
+
+
+*****************************************************************************************************
+CREATE TABLE users (
+	user_name varchar(20) NOT NULL PRIMARY KEY,
+	password varchar(32) NOT NULL
+);
+CREATE TABLE roles (
+	role_name varchar(20) NOT NULL PRIMARY KEY
+);
+CREATE TABLE user_roles (
+	user_name varchar(20) NOT NULL,
+	role_name varchar(20) NOT NULL,
+	PRIMARY KEY (user_name, role_name),
+	CONSTRAINT user_roles_foreign_key_1 FOREIGN KEY (user_name) REFERENCES users (user_name),
+	CONSTRAINT user_roles_foreign_key_2 FOREIGN KEY (role_name) REFERENCES roles (role_name)
+);
+
+INSERT INTO users (user_name, password) VALUES ('vtro', 'juni1274');
+INSERT INTO users (user_name, password) VALUES ('jose', 'jose');
+INSERT INTO users (user_name, password) VALUES ('tomcat', 'tomcat');
+INSERT INTO roles (role_name) VALUES ('adm');
+INSERT INTO roles (role_name) VALUES ('manager');
+INSERT INTO roles (role_name) VALUES ('desenvolvedor');
+
+INSERT INTO user_roles (user_name, role_name) VALUES ('jose', 'adm');
+INSERT INTO user_roles (user_name, role_name) VALUES ('jose', 'manager');
+INSERT INTO user_roles (user_name, role_name) VALUES ('tomcat', 'adm');
+INSERT INTO user_roles (user_name, role_name) VALUES ('vtro', 'desenvolvedor');
+COMMIT;
+
+
+
+		<Realm  className="org.apache.catalina.realm.JDBCRealm"
+             driverName="com.mysql.jdbc.Driver"
+          connectionURL="jdbc:mysql://localhost:3306/vtro"
+         connectionName="root" connectionPassword="root"
+              userTable="users" userNameCol="user_name" userCredCol="password"
+          userRoleTable="user_roles" roleNameCol="role_name" />

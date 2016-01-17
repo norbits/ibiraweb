@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM
+  NAME="rules:telas#manutencao#perfilaluno#listaAlunosAtivos.xhtml"
+  PATH="telas/manutencao/perfilaluno/listaAlunosAtivos.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:telas#manutencao#perfilaluno#listaAlunosAtivos.xhtml:0"
+   NAME="item"
+   PATH="telas/manutencao/perfilaluno/listaAlunosAtivos.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="manutencaoPerfilAluno::telas#manutencao#perfilaluno#manutencaoPerfilAluno.xhtml"
+    NAME="output"
+    PATH="telas/manutencao/perfilaluno/manutencaoPerfilAluno.xhtml"
+    TARGET="rules:telas#manutencao#perfilaluno#manutencaoPerfilAluno.xhtml"
+    TITLE="manutencaoPerfilAluno" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:telas#manutencao#perfilaluno#manutencaoPerfilAluno.xhtml"
+  PATH="telas/manutencao/perfilaluno/manutencaoPerfilAluno.xhtml"
+  SHAPE="448,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:telas#manutencao#relatorio#listaAlunosAtivosRel.xhtml"
+  PATH="telas/manutencao/relatorio/listaAlunosAtivosRel.xhtml"
+  SHAPE="240,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:telas#manutencao#relatorio#listaAlunosAtivosRel.xhtml:0"
+   NAME="item"
+   PATH="telas/manutencao/relatorio/listaAlunosAtivosRel.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="relatorioAlunoRel::telas#manutencao#relatorio#relatorioAReceberAluno.xhtml"
+    NAME="output"
+    PATH="telas/manutencao/relatorio/relatorioAReceberAluno.xhtml"
+    TARGET="rules:telas#manutencao#relatorio#relatorioAReceberAluno.xhtml"
+    TITLE="relatorioAlunoRel" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:telas#manutencao#relatorio#relatorioAReceberAluno.xhtml"
+  PATH="telas/manutencao/relatorio/relatorioAReceberAluno.xhtml"
+  SHAPE="448,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM
+   ID="rules:telas#manutencao#relatorio#relatorioAReceberAluno.xhtml:0"
+   NAME="item"
+   PATH="telas/manutencao/relatorio/relatorioAReceberAluno.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="voltaRelatorioAlunoRel::telas#manutencao#relatorio#listaAlunosAtivosRel.xhtml"
+    NAME="output"
+    PATH="telas/manutencao/relatorio/listaAlunosAtivosRel.xhtml"
+    TARGET="rules:telas#manutencao#relatorio#listaAlunosAtivosRel.xhtml"
+    TITLE="voltaRelatorioAlunoRel" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

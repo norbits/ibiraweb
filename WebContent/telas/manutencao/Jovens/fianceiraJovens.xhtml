@@ -1,0 +1,807 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="/ibiraweb/portal/menu/TB.css" />
+	<link rel="stylesheet" type="text/css" href="/ibiraweb/css/default.css" />
+	<title>IQUALITY WEB</title>
+
+</h:head>
+
+<f:view>
+	<h:body class="vtr1">
+
+		<h:outputStylesheet>
+				.myWidth {width:250px}
+				.myWidthDescr {width:450px}
+				
+				.myClass{
+				    color:red;
+				}
+				
+				.descricao {
+					text-align: left;
+					font-weight: bold;
+					font-size: 14px;
+				}
+				
+				.fonteChamativa{
+					font-weight: 
+					bold;font-size: 14px;
+					color:#FF4500
+				}
+
+    </h:outputStylesheet>
+
+		<h:outputScript library="javascript" name="jquery-1.11.2.js" />
+		<h:outputScript library="javascript" name="jquery.maskedinput.min.js" />
+		<h:outputScript library="javascript" name="jquery-maskmoney.js" />
+
+		<h:outputScript target="head">
+			    $ = jQuery;
+				    $(document).ready(function() {
+				    
+				       $("#manuteFinanceiro\\:dataPagamento").mask("99/99/9999",{placeholder:" "});
+				       
+				        $("#manuteFinanceiro\\:competencia").mask("99/9999",{placeholder:" "});
+				        $("#manuteFinanceiro\\:ano").mask("9999",{placeholder:" "});  
+				        $("#manuteFinanceiro\\:valorPagamento").maskMoney();  
+				       
+				    });
+			</h:outputScript>
+
+
+
+
+		<h:form>
+			<h:inputHidden value="#{financeiroController.init}"></h:inputHidden>
+		</h:form>
+
+		<h:form id="manuteFinanceiro">
+
+			<rich:panel id="panelproj" style="width: 100%;" border="0">
+				<h:panelGrid border="0">
+					<h:outputText styleClass="caminhoPaoText"
+						value=" Manutmenção Financeria por Familia" />
+				</h:panelGrid>
+
+				<rich:messages errorClass="myClass">
+					<h:message for="btnInclui" errorClass="myClass" />
+				</rich:messages>
+
+				<h:panelGrid columns="3" border="0">
+
+					<h:panelGroup>
+
+						<h:panelGrid columns="3" border="0">
+							<h:panelGroup>
+								<a4j:commandButton execute="@this" value="Seleciona Jovem"
+									render=" :manuteFinanceiro:ano "
+									style="width:120px; height:20px; font-size: 14px"
+									id="btnBuscaDados"
+									onclick="#{rich:component('buscaDadosPagamentoJovemPopPup')}.show()" />
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<h:outputText value="Ano Base: " style="font-weight: bold;"
+									for="ano" />
+								
+								<h:inputText id="ano" label="ano" size="4" maxlength="4"
+									value="#{financeiroController.ano}" required="true" 
+									requiredMessage="O Preenchimento do campo 'Ano' é obrigatório">
+									
+									<a4j:ajax execute="@this" event="change" render=":ano" />
+									
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<a4j:commandButton execute="@this" value="Familiares"
+									render=" :tableFamiliaresList "
+									style="width:120px; height:20px; font-size: 14px"
+									id="btnFamiliares"
+									onclick="#{rich:component('popupFamiliares')}.show()" />
+							</h:panelGroup>
+						
+						</h:panelGrid>
+
+						<br />
+
+						<h:panelGrid columns="1" border="0">
+
+							<h:panelGroup>
+								<h:outputText value="Jovem..: " class="descricao"
+									for="nomeDoJovem" />
+
+								<h:outputText id="nomeDoJovem" label="nomeDoJovem" size="50"
+									class="fonteChamativa" maxlength="50"
+									value="#{financeiroController.nomeJovemFinanceiro}" />
+							</h:panelGroup>
+
+						</h:panelGrid>
+
+						<h:panelGrid columns="3" border="0">
+
+							<h:panelGroup>
+								<h:outputText value="Data Pagamento: "
+									style="font-weight: bold;" for="dataPagamento" />
+								<br />
+								<h:inputText id="dataPagamento" label="dataPagamento" size="10"
+									maxlength="10"
+									value="#{financeiroController.dadosFinanceiro.dataPagamento}"
+									required="true"
+									requiredMessage="O Preenchimento do campo 'Data Pagamento' é obrigatório">
+									<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+								</h:inputText>
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<h:outputText value="Competencia: " style="font-weight: bold;"
+									for="competencia" />
+								<br />
+								<h:inputText id="competencia" label="competencia" size="10"
+									maxlength="10"
+									value="#{financeiroController.dadosFinanceiro.competencia}"
+									required="true"
+									requiredMessage="O Preenchimento do campo 'Competencia' é obrigatório">
+									<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+								</h:inputText>
+											
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText id="textoIsento" label="textoIsento" size="20"
+									maxlength="10" styleClass="isentoText"
+									value="#{financeiroController.textoIsento}">
+								</h:outputText>
+							</h:panelGroup>
+							
+							
+						</h:panelGrid>
+
+
+
+
+						<h:panelGrid columns="3" border="0">
+							<h:panelGroup>
+								<h:outputText value="Tipo Pagamento: "
+									style="font-weight: bold;" for="tipoPagamento" />
+								<br />
+								<h:selectOneMenu id="tipoPagamento"
+									value="#{financeiroController.dadosFinanceiro.tipoPagamentoSelected}"
+									style=" width:160px; ">
+									<f:ajax event="change" render=""
+										listener="#{financeiroController.atualizaValorsecao}" />
+									<f:selectItem itemValue="#{null}" />
+									<f:selectItems
+										value="#{financeiroController.tipoPagamentoDataList}"
+										var="tipopgto" itemLabel="#{tipopgto.descricao}"
+										itemValue="#{tipopgto.descricao}" />
+								</h:selectOneMenu>
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<h:outputText value="Razao Pagamento: "
+									style="font-weight: bold;" for="razaoPagamento" />
+								<br />
+								<h:selectOneMenu id="razaoPagamento"
+									value="#{financeiroController.dadosFinanceiro.razaoPagamentoSelected}"
+									style=" width:160px; ">
+									<f:ajax event="change" render=""
+										listener="#{financeiroController.atualizaValorsecao}" />
+									<f:selectItem itemValue="#{null}" />
+									<f:selectItems
+										value="#{financeiroController.razaoPagamentoDataList}"
+										var="rzopgto" itemLabel="#{rzopgto.descricao}"
+										itemValue="#{rzopgto.descricao}" />
+								</h:selectOneMenu>
+							</h:panelGroup>
+
+							<h:panelGroup>
+								<h:outputText value="Valor: " style="font-weight: bold;"
+									for="valorPagamento" />
+								<br />
+								<h:inputText id="valorPagamento" label="competencia" size="10"
+									maxlength="10"
+									value="#{financeiroController.dadosFinanceiro.valorPagamento}"
+									required="true"
+									requiredMessage="O Preenchimento do campo 'Valor Pagamento' é obrigatório">
+									<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+								</h:inputText>
+							</h:panelGroup>
+						</h:panelGrid>
+					</h:panelGroup>
+
+
+
+
+
+
+
+
+
+
+
+					<h:panelGroup>
+						<h:outputText
+							value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+							style="width:120px" />
+					</h:panelGroup>
+
+
+
+
+
+
+
+
+
+
+					<h:panelGroup>
+
+
+						<h:panelGroup>
+							<h:outputText styleClass="textHard" value=" Devedor " />
+						</h:panelGroup>
+						<rich:extendedDataTable
+							value="#{financeiroController.dadosDevedorFinanceiroList}"
+							var="dev" id="tableDevendoFinanceiro"
+							selection="#{financeiroController.selecao}"
+							style="height:80px; width:310px;">
+							
+							<a4j:ajax execute="@this" event="selectionchange"
+								    render=":dataPagamento :competencia :tipoPagamento :razaoPagamento :valorPagamento"
+									listener="#{financeiroController.selecaoDevedorListener}" />
+									
+
+							<rich:column headerClass="myWidthId" width="85px">
+								<f:facet name="header">
+									<h:outputText value="Mês Devedor" />
+								</f:facet>
+								<h:outputText value="#{dev.datadevendo}" />
+							</rich:column>
+
+							<rich:column headerClass="myWidthId" width="120px">
+								<f:facet name="header">
+									<h:outputText value="Razão Devedora" />
+								</f:facet>
+								<h:outputText value="#{dev.razaoDevendo}" />
+							</rich:column>
+
+							<rich:column headerClass="myWidthId" width="90px">
+								<f:facet name="header">
+									<h:outputText value="Valor Devedor" />
+								</f:facet>
+								<h:outputText value="#{dev.valorDevendo}" />
+							</rich:column>
+
+
+						</rich:extendedDataTable>
+
+						<h:panelGroup>
+							<h:outputText styleClass="fonteChamativa" id="valorDevido"
+								value="#{financeiroController.valorTotalDevido}" />
+						</h:panelGroup>
+
+
+					</h:panelGroup>
+
+
+				</h:panelGrid>
+
+
+				<a4j:commandButton value="PAGO"
+					actionListener="#{financeiroController.incluiDadosFinanceiro}"
+					id="btnInclui" render=":tableFinanceiro :tableDevendoFinanceiro :valorDevido"
+					style="width:105px; height:25px; font-size: 14px" />
+
+
+				<br />
+
+
+				<h:panelGrid border="0" columns="1" columnClasses="top,top">
+
+					<rich:extendedDataTable
+						value="#{financeiroController.dadosFinanceiroList}" var="proj"
+						selection="#{financeiroController.selecao}" id="tableFinanceiro"
+						style="height:160px; width:700px;">
+
+
+
+						<a4j:ajax execute="@this" event="selectionchange"
+							listener="#{financeiroController.selecaoListener}" />
+
+
+						<rich:column headerClass="myWidthId" width="40px">
+							<f:facet name="header">
+								<h:outputText value="ID" />
+							</f:facet>
+							<h:outputText value="#{proj.idFin}" />
+						</rich:column>
+
+
+						<rich:column headerClass="myWidthId" width="100px">
+							<f:facet name="header">
+								<h:outputText value="Data Pgto" />
+							</f:facet>
+							<h:outputText value="#{proj.dataPagamento}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="100px">
+							<f:facet name="header">
+								<h:outputText value="Competencia" />
+							</f:facet>
+							<h:outputText value="#{proj.competencia}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="100px">
+							<f:facet name="header">
+								<h:outputText value="Valor Pago" />
+							</f:facet>
+							<h:outputText value="#{proj.valorPagamento}" />
+						</rich:column>
+
+
+
+						<rich:column headerClass="myWidthId" width="120px">
+							<f:facet name="header">
+								<h:outputText value="Razão Pagamento" />
+							</f:facet>
+							<h:outputText value="#{proj.idRazaoPgto}" />
+						</rich:column>
+
+						<rich:column headerClass="myWidthId" width="100px">
+							<f:facet name="header">
+								<h:outputText value="Tipo Pagamento" />
+							</f:facet>
+							<h:outputText value="#{proj.idTipoFormaPgto}" />
+						</rich:column>
+
+
+						<!-- 
+						<rich:column width="45px">
+							<f:facet name="header">
+								<h:outputText value="Altera"></h:outputText>
+							</f:facet>
+
+
+
+							<a4j:commandLink styleClass="no-decor"
+								render="alteraPagamentoPopPup" execute="@this" 
+								oncomplete="#{rich:component('alteraPagamentoPopPup')}.show()">
+								<h:graphicImage value="#{resource['images/edit.gif']}"
+									alt="edit" />
+								<a4j:param value="#{proj.idFin}"
+									assignTo="#{financeiroController.currentFinanceiroOnTable}" />
+								<f:setPropertyActionListener
+									target="#{financeiroController.dadosFinanceiro}" value="#{proj}" />
+							</a4j:commandLink>
+
+						</rich:column>
+						
+ -->
+
+
+						<rich:column width="50px">
+							<f:facet name="header">
+								<h:outputText value="Exclui"></h:outputText>
+							</f:facet>
+							<a4j:commandLink styleClass="no-decor" execute="@this"
+								render="@none"
+								oncomplete="#{rich:component('confirmPane')}.show()">
+								<h:graphicImage value="#{resource['images/delete.gif']}"
+									alt="delete" style="border:none" />
+								<a4j:param value="#{proj.idFin}"
+									assignTo="#{financeiroController.currentFinanceiroOnTable}" />
+							</a4j:commandLink>
+						</rich:column>
+
+
+					</rich:extendedDataTable>
+
+
+					<a4j:jsFunction name="remove"
+						action="#{financeiroController.removeFinanceiroOnTable}"
+						render=":tableFinanceiro :tableDevendoFinanceiro :valorDevido"
+						execute="@this"
+						oncomplete="#{rich:component('confirmPane')}.hide();" />
+
+
+
+				</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+
+			</rich:panel>
+
+		</h:form>
+
+		<h:form id="incluiDadosescoteiro2">
+			<rich:panel id="panelproj" style="width: 100%;" border="0">
+				<rich:popupPanel id="confirmPane" autosized="true">
+					            
+					            Ira Excluir a Informação de Pagamento. Confirma?
+					            <br />
+					<br />
+					<a4j:commandButton value="Cancel"
+						onclick="#{rich:component('confirmPane')}.hide(); return false;" />
+					<a4j:commandButton value="Sim" onclick="remove(); return false;" />
+				</rich:popupPanel>
+			</rich:panel>
+		</h:form>
+
+
+
+		<h:form id="alteraPagamentoForm">
+
+
+			<rich:panel id="panelproj" style="width: 100%;" border="0">
+
+				<rich:popupPanel id="alteraPagamentoPopPup" modal="true"
+					autosized="true" resizeable="false" domElementAttachment="parent">
+
+
+					<f:facet name="header">
+						<h:outputText value="Alteração Dados Pagamento" />
+					</f:facet>
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnOK" errorClass="myClass" />
+					</rich:messages>
+
+					<h:panelGrid columns="1" border="0">
+						<h:panelGrid columns="1" border="0">
+							<h:panelGroup>
+								<h:outputText value="Jovem..: " class="descricao"
+									for="nomeDoJovem" />
+								<h:outputText id="nomeDoJovem" label="nomeDoJovem" size="50"
+									class="fonteChamativa" maxlength="50"
+									value="#{financeiroController.nomeJovemFinanceiro}" />
+							</h:panelGroup>
+						</h:panelGrid>
+					</h:panelGrid>
+
+					<h:panelGrid columns="3" border="0">
+						<h:panelGroup>
+							<h:outputText value="Data Pagamento: " style="font-weight: bold;"
+								for="dataPagamentoAlter" />
+							<br />
+							<h:inputText id="dataPagamentoAlter" label="dataPagamentoAlter"
+								size="10" maxlength="10"
+								value="#{financeiroController.dadosFinanceiro.dataPagamento}"
+								required="true"
+								requiredMessage="O Preenchimento do campo 'Data Pagamento' é obrigatório">
+								<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+							</h:inputText>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<h:outputText value="Competencia: " style="font-weight: bold;"
+								for="competenciaAlter" />
+							<br />
+							<h:inputText id="competenciaAlter" label="competenciaAlter"
+								size="10" maxlength="10"
+								value="#{financeiroController.dadosFinanceiro.competencia}"
+								required="false" disabled="true"
+								requiredMessage="O Preenchimento do campo 'Competencia' é obrigatório">
+								<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+							</h:inputText>
+						</h:panelGroup>
+					</h:panelGrid>
+
+
+
+
+					<h:panelGrid columns="3" border="0">
+						<h:panelGroup>
+							<h:outputText value="Tipo Pagamento: " style="font-weight: bold;"
+								for="tipoPagamentoAlter" />
+							<br />
+							<h:selectOneMenu id="tipoPagamentoAlter"
+								value="#{financeiroController.dadosFinanceiro.tipoPagamentoSelected}"
+								style=" width:160px; ">
+								<f:ajax event="change" render=""
+									listener="#{financeiroController.atualizaValorsecao}" />
+								<f:selectItem itemValue="#{null}" />
+								<f:selectItems value="#{financeiroController.tipoPagamentoList}"
+									var="tipopgto" itemLabel="#{tipopgto.descricao}"
+									itemValue="#{tipopgto.descricao}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<h:outputText value="Razao Pagamento: "
+								style="font-weight: bold;" for="razaoPagamentoAlter" />
+							<br />
+							<h:selectOneMenu id="razaoPagamentoAlter"
+								value="#{financeiroController.dadosFinanceiro.razaoPagamentoSelected}"
+								style=" width:160px; ">
+								<f:ajax event="change" render=""
+									listener="#{financeiroController.atualizaValorsecao}" />
+								<f:selectItem itemValue="#{null}" />
+								<f:selectItems
+									value="#{financeiroController.razaoPagamentoList}"
+									var="rzopgto" itemLabel="#{rzopgto.descricao}"
+									itemValue="#{rzopgto.descricao}" />
+							</h:selectOneMenu>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<h:outputText value="Valor: " style="font-weight: bold;"
+								for="valorPagamentoAlter" />
+							<br />
+							<h:inputText id="valorPagamentoAlter" label="competencia"
+								size="10" maxlength="10"
+								value="#{financeiroController.dadosFinanceiro.valorPagamento}"
+								required="true"
+								requiredMessage="O Preenchimento do campo 'Valor Pagamento' é obrigatório">
+								<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+							</h:inputText>
+						</h:panelGroup>
+					</h:panelGrid>
+
+					<p>
+
+						<a4j:commandButton value="OK" id="btnOK"
+							actionListener="#{financeiroController.alteraDadoPagamentoJaPago}"
+							render="" execute="alteraPagamentoPopPup"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('alteraPagamentoPopPup')}.hide();}" />
+						<a4j:commandButton value="Cancel"
+							onclick="#{rich:component('alteraPagamentoPopPup')}.hide(); return false;" />
+
+					</p>
+
+				</rich:popupPanel>
+
+
+			</rich:panel>
+
+
+		</h:form>
+
+		<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+		<h:form id="buscaDadosPagamentoJovemForm">
+
+			<rich:panel id="panelproj" style="width: 100%;" border="0">
+
+				<rich:popupPanel id="buscaDadosPagamentoJovemPopPup" modal="true"
+					style="width: 100px; height:100px" resizeable="false" domElementAttachment="parent">
+
+
+					<f:facet name="header">
+						<h:outputText value="Busca Dados de Pagamento do Jovem" />
+					</f:facet>
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnOK2" errorClass="myClass" />
+					</rich:messages>
+
+					<h:panelGrid columns="1" border="0">
+						<h:panelGroup>
+							<a4j:jsFunction name="buscarIdJovem" execute="buscarNomeJovem"
+								action="#{financeiroController.popularIdSindicoGeral}"
+								render="       :buscarNomeJovem :numfamiliafin :idJovemSelecionado" />
+
+							<h:outputLabel value="Nome do Jovem:" style="font-weight: bold;"
+								for="buscarNomeJovem" />
+							<br />
+							<rich:autocomplete id="buscarNomeJovem" 
+								autocompleteMethod="#{financeiroController.buscarListaJovem}"
+								var="jov" minChars="1" onselectitem="buscarIdJovem()"
+								layout="table" fetchValue="#{jov.iddadosjovem}"
+								value="#{financeiroController.nomeJovemSelectAutoComplete}"
+								required="false" label="Nome do Jovem"
+								requiredMessage="O Preenchimento do campo 'Nome do Jovem' é obrigatório">
+								<rich:column>   #{jov.nroFamilia}  </rich:column>
+								<rich:column>    - </rich:column>
+								<rich:column>    #{jov.nomeJoven}  </rich:column>
+								<rich:column>    - </rich:column>
+								<rich:column>    #{jov.secao}  </rich:column>
+							</rich:autocomplete>
+						</h:panelGroup>
+
+
+						<h:panelGroup>
+							<h:outputText value="Nro. Família.: " style="font-weight: bold;"
+								for="numfamiliafin" />
+							<br />
+							<h:selectOneMenu id="numfamiliafin"
+								value="#{financeiroController.nroFamiliaCorrentSelected}"
+								valueChangeListener="#{financeiroController.valueChanged}"
+								style=" width:200px; ">
+								<f:selectItem itemValue="#{null}" />
+								<f:selectItems
+									value="#{financeiroController.nroFamiliaListselectItem}" />
+								<a4j:ajax event="valueChange"
+									render=":numfamiliafin :buscarNomeJovem" execute="@this" />
+							</h:selectOneMenu>
+
+						</h:panelGroup>
+
+
+					</h:panelGrid>
+
+
+
+
+					<p>
+
+						<a4j:commandButton value="OK" id="btnOK2"
+							actionListener="#{financeiroController.buscaDadoPagamentoJaPago}"
+							render=":tableFinanceiro :valorDevido :nomeDoJovem :tableDevendoFinanceiro :textoIsento"
+							execute="buscaDadosPagamentoJovemPopPup"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('buscaDadosPagamentoJovemPopPup')}.hide();}" />
+
+						<a4j:commandButton value="Cancel"
+							onclick="#{rich:component('buscaDadosPagamentoJovemPopPup')}.hide(); return false;" />
+
+						<a4j:commandButton value="Limpar" id="btnLimpar"
+							actionListener="#{financeiroController.limpaBuscarDadsJovem}"
+							render=":numfamiliafin :buscarNomeJovem"
+							execute="buscaDadosPagamentoJovemPopPup">
+						</a4j:commandButton>
+					</p>
+
+				</rich:popupPanel>
+
+
+			</rich:panel>
+			
+			
+			
+			
+			
+			
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+			
+			
+			<rich:panel id="panelprojConfirmaIsento" style="width: 100%;" border="0">
+
+				<rich:popupPanel id="popupPanelprojConfirmaIsento" modal="true"
+					autosized="true" resizeable="false" domElementAttachment="parent">
+
+
+					<f:facet name="header">
+						<h:outputText value="Confirmação  " />
+					</f:facet>
+					
+						<h:panelGrid border="0">
+					<h:outputText styleClass="caminhoPaoText"
+						value=" Confirmação Alterar Status de Pagamento do Jovem ?" />
+				</h:panelGrid>
+
+
+					<p>
+
+						<a4j:commandButton value="SIM" id="btnSIM"
+							actionListener="#{financeiroController.alteraStatusIsento}"
+							render=":confirmaIsento"
+							execute="popupPanelprojConfirmaIsento"
+							oncomplete="if (#{facesContext.maximumSeverity==null}) {#{rich:component('popupPanelprojConfirmaIsento')}.hide();}" />
+
+						<a4j:commandButton value="NÃO"
+							render=":confirmaIsento"
+							onclick="#{rich:component('popupPanelprojConfirmaIsento')}.hide(); return false;" />
+
+					</p>
+
+				</rich:popupPanel>
+
+
+			</rich:panel>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////// -->
+
+<rich:panel id="panelprojFamiliares" style="width: 100%;" border="0">
+
+				<rich:popupPanel id="popupFamiliares" modal="true"
+					autosized="true" resizeable="false" domElementAttachment="parent">
+
+
+					<f:facet name="header">
+						<h:outputText value="Familiares do Jovem Selecionado" />
+					</f:facet>
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnOK2" errorClass="myClass" />
+					</rich:messages>
+
+					<h:panelGrid columns="1" border="0">
+						
+
+
+						<rich:extendedDataTable
+							value="#{financeiroController.familiaresList}"
+							var="dev" id="tableFamiliaresList"
+							style="height:80px; width:310px;">
+
+							<rich:column headerClass="myWidthId" width="65px">
+								<f:facet name="header">
+									<h:outputText value="Seção" />
+								</f:facet>
+								<h:outputText value="#{dev.secao}" />
+							</rich:column>
+
+							<rich:column headerClass="myWidthId" width="220px">
+								<f:facet name="header">
+									<h:outputText value="Nome" />
+								</f:facet>
+								<h:outputText value="#{dev.nomeJoven}" />
+							</rich:column>
+
+						</rich:extendedDataTable>
+
+
+
+
+
+
+
+
+
+
+					</h:panelGrid>
+
+					<p>
+						<a4j:commandButton value="Fecha" id="btnfechafamiliares"
+							onclick="#{rich:component('popupFamiliares')}.hide(); return false;" />
+					</p>
+
+				</rich:popupPanel>
+
+
+			</rich:panel>
+
+
+
+
+
+		</h:form>
+
+
+
+
+	</h:body>
+
+</f:view>
+
+</html>
+

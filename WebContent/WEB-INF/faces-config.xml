@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config version="2.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    	http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+  <application>
+    <resource-bundle>
+      <base-name>ibiraweb</base-name>
+      <var>aprendiz</var>
+    </resource-bundle>
+  </application>
+
+	<factory>
+		<exception-handler-factory>
+			br.com.ibiraweb.util.exception.CustomExceptionHandlerFactory
+		</exception-handler-factory>
+	</factory> 
+
+
+<!-- 
+  <managed-bean>
+  <managed-bean-name>pc_Index</managed-bean-name>
+  <managed-bean-class>barca.Index</managed-bean-class>
+  <managed-bean-scope>request</managed-bean-scope>
+ </managed-bean>
+
+
+<faces-config>
+    <managed-bean>
+        <managed-bean-name>pageLoadListener</managed-bean-name>
+        <managed-bean-class>br.com.ibiraweb.PageLoadListener</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+</faces-config>
+
+
+<lifecycle>
+    <phase-listener>br.com.ibiraweb.PageLoadListener</phase-listener>
+</lifecycle>
+ -->
+
+
+</faces-config>
+

@@ -1,0 +1,56 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="tipo" 	tipo="int" 	name="idCondAtivItem"/>
+ 		</entrada>
+		 <saida>
+			<p  tipo="oj" item="ibiraweb.bean.ListaParcela" seq="1"/>
+		</saida>
+</parametros>
+
+
+<acao seq="1" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table=" trecebimento t left join tdadoscheque on t.id = tdadoscheque.idRecebimento and tdadoscheque.dataDesativado is null, tformapgto tfp " >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="t.id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="tfp.formaPgto" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="t.valor" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="t.dataRecebimento" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="tb" nomeColObj="null" nomeColTable="ifnull(tdadoscheque.numeroCheque,0)" utilClass=""  defaultValue="" > </column>
+				 	<column id="5" val="tb" nomeColObj="null" nomeColTable="ifnull(tdadoscheque.banco,0)" utilClass=""  defaultValue="" > </column>
+					<column id="6" val="tb" nomeColObj="null" nomeColTable="ifnull(tdadoscheque.agencia,0)" utilClass=""  defaultValue="" > </column>
+					<column id="7" val="tb" nomeColObj="null" nomeColTable="ifnull(tdadoscheque.conta,0)" utilClass=""  defaultValue="" > </column>
+					<column id="8" val="tb" nomeColObj="null" nomeColTable="tdadoscheque.nome" utilClass=""  defaultValue="" > </column>
+					<column id="9" val="tb" nomeColObj="null" nomeColTable="ifnull(tdadoscheque.valor,0)" utilClass=""  defaultValue="" > </column>
+					<column id="10" val="tb" nomeColObj="null" nomeColTable="tdadoscheque.dataCadastro" utilClass=""  defaultValue="" > </column>
+					<column id="11" val="tb" nomeColObj="null" nomeColTable="ifnull((select descricao from tdirecionado tdir where tdadoscheque.idDirecionado = tdir.id),0)" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>	
+				<condition> 
+					<name 	depends="" 	value="t.idformapgto" />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tfp.id"      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="t.idCondAtivItem" />
+					<op 	depends="" 	value="=" />
+					<value val="dp"     value=""      nomeColObj=""	 utilClass=""  defaultValue="" dependencia="0:0"/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="t.dataDesativado" />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia="0:0"/>
+				</condition>
+				
+				
+			</condicao>	
+				<retorno id="0" val="oj" item="" atributo="listaParcelaList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+</root>

@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+	<link rel="stylesheet" type="text/css"
+		href="/ibiraweb/portal/menu/TB.css" />
+	<link rel="stylesheet" type="text/css" href="/ibiraweb/css/default.css" />
+	<title>IQUALITY WEB</title>
+
+</h:head>
+
+<f:view>
+	<h:body class="vtr1" style="background-color:#EDEAE7;border:0px;">
+		<h:outputStylesheet>
+			.myWidth 		{width:250px; }
+			.myWidthDescr	{width:450px}
+			
+			.myClass{
+			    color:red;
+			}
+			.corColunaTabela{
+				background-color: #FFE4B5;
+			}
+  		  </h:outputStylesheet>
+
+
+
+		<h:outputScript library="javascript" name="jquery-1.11.2.js" />
+		<h:outputScript library="javascript" name="jquery.maskedinput.min.js" />
+		<h:outputScript library="javascript" name="jquery-maskmoney.js" />
+
+
+		<h:outputScript target="head">
+			    $ = jQuery;
+				    $(document).ready(function() {
+				         $("#variaveisform\\:contribMensal").maskMoney();  
+				         $("#variaveisform\\:contrbMensalAtrasadaMes").maskMoney(); 
+				         $("#variaveisform\\:contribMensalAtrasadaForaMes").maskMoney(); 
+				         $("#variaveisform\\:registroUEB").maskMoney(); 
+				         $("#variaveisform\\:anobase").mask("9999",{placeholder:" "});  
+				         $("#variaveisform\\:diaVencimentoMensalidade").mask("99",{placeholder:" "});  
+				        
+				        $("#variaveisform\\:anoAnterior").mask("?9999",{placeholder:" "});
+				    });
+			</h:outputScript>
+			
+			
+			
+			
+			<h:form>
+				<h:inputHidden value="#{variaveiscontroller.init}"></h:inputHidden>
+			</h:form>
+			
+			
+
+		<h:form id="variaveisform" style="width: 100%; height:100%">
+
+				<rich:panel id="panelproj" style="width: 100%;" border="0">
+					<h:panelGrid border="0">
+						<h:outputText styleClass="caminhoPaoText"
+							value=" Cadastro de Parametros do Sistema" />
+					</h:panelGrid>
+
+					<rich:messages errorClass="myClass">
+						<h:message for="btnAterar" errorClass="myClass" />
+					</rich:messages>
+
+										<br />
+
+						<h:panelGrid columns="1" border="0">
+								
+								
+									<h:panelGroup>
+										<h:outputText value="ID Parametro: " style="font-weight: bold;"
+											for="idMensal" />
+										<h:outputText id="idMensal" style="font-weight: bold;" label="idMensal" size="10"
+											maxlength="10"
+											value="#{variaveiscontroller.variaveis.id}">
+										</h:outputText>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Data Alteração: " style="font-weight: bold;"
+											for="dataUltimaAlteracao" />
+										<h:outputText id="dataUltimaAlteracao" style="font-weight: bold;" label="idMensal" size="10"
+											maxlength="10"
+											value="#{variaveiscontroller.variaveis.dataUltimaAlteracao}">
+										</h:outputText>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Alterado Por: " style="font-weight: bold;"
+											for="user" />
+										<h:outputText id="user" style="font-weight: bold;" label="user" size="45"
+											maxlength="45"
+											value="#{variaveiscontroller.variaveis.user}">
+										</h:outputText>
+									</h:panelGroup>
+								
+								
+									<h:panelGroup>
+										<h:outputText value="Valor Contribuição Mensal: " style="font-weight: bold;"
+											for="contribMensal" />
+										<h:inputText id="contribMensal" label="contribMensal" size="10"
+											maxlength="10"
+											value="#{variaveiscontroller.variaveis.contribMensal}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Contribuição Mensal' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>
+				
+									<h:panelGroup>
+										<h:outputText value="Valor Contribuição Mensal Atrasada dentro do Mês: " style="font-weight: bold;"
+											for="contrbMensalAtrasadaMes" />
+										<h:inputText id="contrbMensalAtrasadaMes" label="contrbMensalAtrasadaMes" size="10"
+											maxlength="10"
+											value="#{variaveiscontroller.variaveis.contrbMensalAtrasadaMes}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Contribuição Mensal Atrasada dentro do Mês' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>
+									
+									<h:panelGroup>
+										<h:outputText value="Valor Contribuição Mensal Atrasada Fora do Mês: " style="font-weight: bold;"
+											for="contribMensalAtrasadaForaMes" />
+										<h:inputText id="contribMensalAtrasadaForaMes" label="contribMensalAtrasadaForaMes" size="10"
+											maxlength="10"
+											value="#{variaveiscontroller.variaveis.contribMensalAtrasadaForaMes}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Contribuição Mensal Atrasada Fora do Mês' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>	
+									
+									<h:panelGroup>
+										<h:outputText value="Valor do Registro na UEB: " style="font-weight: bold;"
+											for="registroUEB" />
+										<h:inputText id="registroUEB" label="registroUEB" size="10"
+											maxlength="10"
+											value="#{variaveiscontroller.variaveis.registroUEB}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Contribuição Mensal Atrasada Fora do Mês' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>	
+									
+									<h:panelGroup>
+										<h:outputText value="Ano Base: " style="font-weight: bold;"
+											for="anobase" />
+										<h:inputText id="anobase" label="anobase" size="4"
+											maxlength="4"
+											value="#{variaveiscontroller.variaveis.anobase}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Ano Base:' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>	
+									
+									<!-- 
+									<h:panelGroup>
+										<h:outputText value="Inclui Ano Anterior ? : " style="font-weight: bold;"
+											for="anoAnterior" />
+										<h:inputText id="anoAnterior" label="anobase" size="4"
+											maxlength="4"
+											value="#{variaveiscontroller.variaveis.anoAnterior}"
+											required="false">
+										</h:inputText>
+										<h:outputText value=" * Se preenchido ira calcular Ano Anterior Devedor  " style="font-weight: bold;"
+											for="anoAnterior" />
+									</h:panelGroup>
+									 -->
+									
+									<h:panelGroup>
+										<h:outputText value="Dia de Vencimento da Mensalidade: " style="font-weight: bold;"
+											for="diaVencimentoMensalidade" />
+										<h:inputText id="diaVencimentoMensalidade" label="diaVencimentoMensalidade" size="2"
+											maxlength="2"
+											value="#{variaveiscontroller.variaveis.diaVencimentoMensalidade}"
+											required="true"
+											requiredMessage="O Preenchimento do campo 'Dia de Vencimento da Mensalidade' é obrigatório">
+											<!-- 	<f:ajax event="change" render="incluiPlano:valorAtv" />   -->
+										</h:inputText>
+									</h:panelGroup>	
+									
+									
+								</h:panelGrid>
+
+
+
+				<a4j:commandButton value="ALTERAR"
+					actionListener="#{variaveiscontroller.alteraParametros}"
+					id="btnAterar" render=":idMensal :dataUltimaAlteracao :user :contribMensal :contrbMensalAtrasadaMes :contribMensalAtrasadaForaMes :registroUEB :anobase :diaVencimentoMensalidade "
+					style="width:105px; height:25px; font-size: 14px" />
+
+
+
+
+
+
+
+
+
+
+
+
+				</rich:panel>
+
+		</h:form>
+		
+	</h:body>
+
+</f:view>
+
+</html>
+

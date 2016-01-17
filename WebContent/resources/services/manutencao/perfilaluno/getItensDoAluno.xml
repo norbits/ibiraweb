@@ -1,0 +1,103 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="tipo" 	tipo="int" 	name="idAluno"/>
+ 		</entrada>
+		 <saida>
+			<p  tipo="oj" item="ibiraweb.bean.CombosPerfilAluno" seq="1:2"/>
+		</saida>
+</parametros>
+
+<acao seq="1" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table=" tcondicaoplano tcp, tplano tp, tformapgto tfp " >
+			<colunas>
+			        <column id="0" val="tb" nomeColObj="null" nomeColTable="tcp.id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="tp.nomePlano" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="tfp.formaPgto" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="tcp.valor" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="tb" nomeColObj="null" nomeColTable="tp.parcelas" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="df" nomeColObj="null" nomeColTable="'true' isDelete" utilClass=""  defaultValue="" > </column>
+					<column id="5" val="df" nomeColObj="null" nomeColTable="(SELECT count(1) FROM trecebimento tr where tr.idCondPlano = tcp.id and tr.dataDesativado is null) qtdParcelasPlano " utilClass=""  defaultValue="" > </column>
+					<column id="6" val="df" nomeColObj="null" nomeColTable="(SELECT ifnull(sum(valor),0) FROM trecebimento tr where tr.idCondPlano = tcp.id and tr.dataDesativado is null) valorRecebidoPlano " utilClass=""  defaultValue="" > </column>
+					<column id="7" val="df" nomeColObj="null" nomeColTable="(SELECT tcp.valor-ifnull(sum(valor),0) FROM trecebimento tr where tr.idCondPlano = tcp.id and tr.dataDesativado is null) faltaReceber " utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="tcp.idaluno" />
+					<op 	depends="" 	value="=" />
+					<value val="dp" 	value=""  nomeColObj=""	 utilClass=""  defaultValue="0" dependencia="0:0"/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tcp.idplano " />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tp.id"       nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tcp.idformapgto " />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tfp.id"      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				<condition>
+					<name 	depends="" 	value="tcp.datatermino " />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				
+			</condicao>	
+				<retorno id="0" val="oj" item="" atributo="condicaoPlanoList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+ 
+ 
+
+
+<acao seq="2" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table=" tcondicaoatividadeitem tcai, tatividadeitem tai, tformapgto tfp " >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="tcai.id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="tai.nome" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="tfp.formaPgto" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="tcai.valor" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="tb" nomeColObj="null" nomeColTable="tai.parcelas" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="df" nomeColObj="null" nomeColTable="'false' isDelete" utilClass=""  defaultValue="" > </column>
+					<column id="5" val="df" nomeColObj="null" nomeColTable="(SELECT count(1) FROM trecebimento tr where tr.idCondAtivItem = tcai.id and tr.dataDesativado is null) qtdParcelasItem " utilClass=""  defaultValue="" > </column>
+					<column id="6" val="df" nomeColObj="null" nomeColTable="(SELECT ifnull(sum(valor),0) FROM trecebimento tr where tr.idCondAtivItem = tcai.id and tr.dataDesativado is null) valorRecebidoItem " utilClass=""  defaultValue="" > </column>
+					<column id="7" val="df" nomeColObj="null" nomeColTable="(SELECT tcai.valor-ifnull(sum(valor),0) FROM trecebimento tr where tr.idCondAtivItem = tcai.id and tr.dataDesativado is null) faltaReceber " utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="tcai.idaluno" />
+					<op 	depends="" 	value="=" />
+					<value val="dp"     value=""        nomeColObj=""	 utilClass=""  defaultValue="0" dependencia="0:0"/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tcai.idatividadeitem" />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tai.id"  nomeColObj=""	 utilClass=""  defaultValue="tai.id" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tcai.idformapgto" />
+					<op 	depends="" 	value="=" />
+					<value val="ct"     value="tfp.id"      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+				
+				<condition>
+					<name 	depends="" 	value="tcai.datatermino " />
+					<op 	depends="" 	value=" is " />
+					<value val="df"     value=""      nomeColObj=""	 utilClass=""  defaultValue="null" dependencia=""/>
+				</condition>
+				
+			</condicao>	
+				<retorno id="0" val="oj" item="" atributo="condicaoAtividadeitensList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+
+</root>

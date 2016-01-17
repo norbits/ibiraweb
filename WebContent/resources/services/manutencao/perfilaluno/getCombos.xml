@@ -1,0 +1,91 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada/>
+		 <saida>
+			<p  tipo="oj" item="ibiraweb.bean.CombosPerfilAluno" seq="1:2:3:4"/>
+		</saida>
+</parametros>
+
+
+<acao seq="1" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="tplano" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="nomePlano" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="valor" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""       value=""    nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+			<retorno id="0" val="oj" item="" atributo="planoList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+<acao seq="2" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="tatividadeitem" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="nome" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="valor" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""       value=""     nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+			<retorno id="0" val="oj" item="" atributo="atividadeItemList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+<acao seq="3" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="tformapgto" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="formaPgto" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""       value=""      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+			<retorno id="0" val="oj" item="" atributo="formaPgroList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+
+<acao seq="4" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="tdirecionado" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="descricao" utilClass=""  defaultValue="" > </column>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""       value=""      nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+			<retorno id="0" val="oj" item="" atributo="direcionadoList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+
+</root>

@@ -1,0 +1,66 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="ibiraweb.bean.Recebimento" 	name="idAluno"/>
+ 		</entrada>
+		 <saida>
+			<p  tipo="int" item="" seq="2"/>
+		</saida>
+</parametros>
+
+
+
+<acao seq="1" comando="insert" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="Recebimento" table=" trecebimento " >
+			<colunas>
+					<column val="cl" nomeColObj="id" 				nomeColTable="id" 				utilClass="br.com.utilityes.Utils.getId"  defaultValue="0"/>
+					<column val="oj" nomeColObj="idCondAtivItem" 	nomeColTable="idCondAtivItem" 	utilClass="br.com.utilityes.Utils.getForeinKeyNull"  defaultValue=""/>
+					<column val="oj" nomeColObj="idCondPlano" 		nomeColTable="idCondPlano" 		utilClass="br.com.utilityes.Utils.getForeinKeyNull"  defaultValue=""/>
+					<column val="oj" nomeColObj="idFormaPgto" 		nomeColTable="idFormaPgto" 	    utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="valor" 			nomeColTable="valor" 			utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="dataRecebimento" 	nomeColTable="dataRecebimento" 	utilClass=""  defaultValue=""/>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name depends="" value=""/>
+					<op depends="" value=""/>
+					<value val=""    value=""  nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>	
+			</condicao>	
+				<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+
+
+<acao seq="2" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="trecebimento" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="max(id)" utilClass=""  defaultValue="" > </column>
+			</colunas>
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""      value="" nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+				<retorno id="0" val="int" item="" atributo="" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+
+
+
+
+
+
+
+
+</root>

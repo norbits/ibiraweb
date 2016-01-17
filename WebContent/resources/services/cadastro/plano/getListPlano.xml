@@ -1,0 +1,38 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada/>
+		 <saida>
+			<p  tipo="oj" item="ibiraweb.bean.Plano" seq="1"/>
+		</saida>
+</parametros>
+
+
+<acao seq="1" comando="select" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="null" table="tplano" >
+			<colunas>
+					<column id="0" val="tb" nomeColObj="null" nomeColTable="id" utilClass=""  defaultValue="" > </column>
+					<column id="1" val="tb" nomeColObj="null" nomeColTable="nomePlano" utilClass=""  defaultValue="" > </column>
+					<column id="2" val="tb" nomeColObj="null" nomeColTable="qtdHoras" utilClass=""  defaultValue="" > </column>
+					<column id="3" val="tb" nomeColObj="null" nomeColTable="valor" utilClass=""  defaultValue="" > </column>
+					<column id="4" val="tb" nomeColObj="null" nomeColTable="dataInicio" utilClass=""  defaultValue="" > </column>
+					<column id="5" val="tb" nomeColObj="null" nomeColTable="dataTermino" utilClass=""  defaultValue="" > </column>
+					<column id="6" val="tb" nomeColObj="null" nomeColTable="ensino" utilClass=""  defaultValue="" > </column>
+					<column id="7" val="tb" nomeColObj="null" nomeColTable="periodo" utilClass=""  defaultValue="" > </column>
+					<column id="8" val="tb" nomeColObj="null" nomeColTable="parcelas" utilClass=""  defaultValue="" > </column>
+					
+			</colunas> 
+			<condicao>
+				<condition>
+					<name 	depends="" 	value="" />
+					<op 	depends="" 	value="" />
+					<value val=""       value="" nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>
+			</condicao>	
+			<retorno id="0" val="oj" item="" atributo="planoList" utiliza="" utilClass=""  defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+</root>

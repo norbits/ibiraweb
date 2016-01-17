@@ -1,0 +1,67 @@
+<root servico="Listar Plano" autoCommit="false" >
+<parametros>
+		<entrada seq="0">
+			<p id="0" item="obj" 	tipo="ibiraweb.bean.CondicaoPlano" 	name="idAluno"/>
+ 		</entrada>
+		 <saida>
+			<p  tipo="" item="" seq="1"/>
+		</saida>
+</parametros>
+
+
+
+<acao seq="1" comando="update" dependencia="0" descricao="">
+		<reacao  objetoUso="" table=" tcondicaoplano " >
+			<colunas>
+					<column val="cl" nomeColObj="" 				nomeColTable="datatermino" 				utilClass="br.com.utilityes.Datas.getDataHoraAgora"  defaultValue=""/>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name depends="" value="idaluno"/>
+					<op depends="" value="="/>
+					<value val="oj"    value=""   nomeColObj="idaluno"	utilClass="" defaultValue="" dependencia="0:0"/>	
+				</condition>
+				
+				<condition>
+					<name depends="" value="datatermino"/>
+					<op depends="" value=" is "/>
+					<value val="df"    value=""   nomeColObj=""	utilClass="" defaultValue="null" dependencia="0:0"/>	
+				</condition>
+				
+					
+			</condicao>	
+				<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+<acao seq="2" comando="insert" dependencia="0" descricao="recupera da base todas as atividades Cadastradas em formato de Lista">
+		<reacao  objetoUso="CondicaoPlano" table=" tcondicaoplano " >
+			<colunas>
+					<column val="cl" nomeColObj="id" 				nomeColTable="id" 				utilClass="br.com.utilityes.Utils.getId"  defaultValue="0"/>
+					<column val="oj" nomeColObj="idaluno" 			nomeColTable="idaluno" 			utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="idplano" 			nomeColTable="idplano" 			utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="idformapgto" 		nomeColTable="idformapgto" 		utilClass=""  defaultValue=""/>
+					<column val="oj" nomeColObj="valor" 			nomeColTable="valor" 			utilClass=""  defaultValue=""/>
+					<column val="cl" nomeColObj="datacadastro" 		nomeColTable="datacadastro" 	utilClass="br.com.utilityes.Datas.getDataHoraAgora"  defaultValue=""/>
+			</colunas> 
+			<condicao>
+				<condition>
+					<name depends="" value=""/>
+					<op depends="" value=""/>
+					<value val=""    value=""  nomeColObj=""	 utilClass=""  defaultValue="" dependencia=""/>
+				</condition>	
+			</condicao>	
+				<retorno id="" val="" item="" utiliza="" utilClass="" defaultValue="" />
+		</reacao>
+		<excecaosecondicao/>
+</acao>
+
+
+
+
+
+
+
+
+</root>

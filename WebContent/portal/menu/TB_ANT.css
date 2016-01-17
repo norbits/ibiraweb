@@ -1,0 +1,142 @@
+.itemTopOff {
+	BORDER-BOTTOM: #000000 1px solid;
+	TEXT-ALIGN: center;
+	BORDER-LEFT: = #000000 1px solid;
+	PADDING-BOTTOM: 1px;
+	BACKGROUND-COLOR: #cccccc; =
+	PADDING-LEFT: 1px;
+	WIDTH: 130px;
+	PADDING-RIGHT: 1px;
+	BORDER-TOP: #000000=1px solid;
+	BORDER-RIGHT: #000000 1px solid;
+
+	PADDING-TOP: 1px
+}
+
+.itemTopOn {
+	BORDER-BOTTOM: #000000 1px solid;
+	TEXT-ALIGN: center;
+	BORDER-LEFT: = #000000 1px solid;
+	PADDING-BOTTOM: 1px;
+	BACKGROUND-COLOR: #333333; =
+	PADDING-LEFT: 1px;
+	WIDTH: 130px;
+	PADDING-RIGHT: 1px;
+	BORDER-TOP: #000000= 
+1px solid;
+	CURSOR: default;
+	BORDER-RIGHT: #000000 1px solid; =
+	PADDING-TOP: 1px
+}
+
+
+
+.itemSubOff {
+	BORDER-BOTTOM: #000000 1px solid;
+	TEXT-ALIGN: left;
+	BORDER-LEFT: = #000000 1px solid;
+	PADDING-BOTTOM: 1px;
+	BACKGROUND-COLOR: #cccccc; =
+	PADDING-LEFT: 11px;
+	WIDTH: 215px;
+	PADDING-RIGHT: 6px;
+	BORDER-TOP: = #000000 1px solid;
+	BORDER-RIGHT: #000000 1px solid;
+	PADDING-TOP: 1px
+}
+
+.itemSubOn {
+	BORDER-BOTTOM: #000000 1px solid;
+	TEXT-ALIGN: left;
+	BORDER-LEFT: = #000000 1px solid;
+	PADDING-BOTTOM: 1px;
+	BACKGROUND-COLOR: #333333; =
+	PADDING-LEFT: 11px;
+	WIDTH: 215px;
+	PADDING-RIGHT: 6px;
+	BORDER-TOP: = #000000 1px solid;
+	CURSOR: default;
+	BORDER-RIGHT: #000000 1px solid; =
+	PADDING-TOP: 1px
+}
+
+.itemTitle {
+	BORDER-BOTTOM: #000000 1px solid;
+	TEXT-ALIGN: center;
+	BORDER-LEFT: = #000000 1px solid;
+	PADDING-BOTTOM: 1px;
+	BACKGROUND-COLOR: #c99666; =
+	PADDING-LEFT: 1px;
+	WIDTH: 130px;
+	PADDING-RIGHT: 1px;
+	BORDER-TOP: #000000= 
+1px solid;
+	CURSOR: default;
+	BORDER-RIGHT: #000000 1px solid; =
+	PADDING-TOP: 1px
+}
+
+.fontOff {
+	FONT-FAMILY: verdana;
+	COLOR: #000000;
+	FONT-SIZE: 10pt
+}
+
+.fontOn {
+	FONT-FAMILY: verdana;
+	COLOR: #ffffff;
+	FONT-SIZE: 10pt
+}
+
+.fontTitle {
+	FONT-FAMILY: verdana;
+	COLOR: #ffffff;
+	FONT-SIZE: 10pt
+}
+
+.tagOff {
+	WIDTH: 8px;
+	BACKGROUND: url(images/tagRN.gif) no-repeat 50% bottom; =
+	FLOAT: right;
+	HEIGHT: 13px
+}
+
+.tagOn {
+	WIDTH: 8px;
+	BACKGROUND: url(images/tagRH.gif) no-repeat 50% bottom; =
+	FLOAT: right;
+	HEIGHT: 13px
+}
+
+.tagDownOff {
+	WIDTH: 20px;
+	BACKGROUND: url(/ibiraweb/portal/imagens/mais.gif) no-repeat left bottom; =
+	FLOAT: right;
+	HEIGHT: 10px
+}
+
+.tagDownOn {
+	WIDTH: 20px;
+	BACKGROUND: url(/ibiraweb/portal/imagens/mais.gif) no-repeat left bottom; =
+	FLOAT: right;
+	HEIGHT: 10px
+}
+
+
+.vtr1
+{
+    BACKGROUND-POSITION: 300px 25px;
+    BACKGROUND-ATTACHMENT: fixed;
+    BACKGROUND-IMAGE: url(../imagens/fundoF.png);
+    COLOR: #FFFFFFF;
+    BACKGROUND-REPEAT: no-repeat;
+    FONT-FAMILY: Verdana, Arial, Helvetica, Sans-serif;
+    
+}
+
+
+
+
+
+
+

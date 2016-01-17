@@ -1,0 +1,154 @@
+BODY {
+	BACKGROUND-COLOR: #ffffff;
+	COLOR: #000000
+}
+
+TABLE {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+TD {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+P {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+DIV SPAN {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+NOBR {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+UL {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+OL {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+LI {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+INPUT {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: = 12pt;
+	FONT-WEIGHT: normal
+}
+
+TEXTAREA {
+	BORDER-BOTTOM: #003366 1px solid;
+	BORDER-LEFT: #003366 1px solid; =
+	PADDING-BOTTOM: 12pt;
+	BACKGROUND-COLOR: #cccccc;
+	MARGIN: 12pt; =
+	PADDING-LEFT: 12pt;
+	PADDING-RIGHT: 12pt;
+	FONT-FAMILY: sans-serif,= 
+ verdana, helvetica;
+	COLOR: #003366;
+	FONT-SIZE: 11pt;
+	BORDER-TOP: #003366= 
+1px solid;
+	BORDER-RIGHT: #003366 1px solid;
+	PADDING-TOP: 12pt
+}
+
+PRE {
+	BORDER-BOTTOM: #003366 1px solid;
+	BORDER-LEFT: #003366 1px solid; =
+	PADDING-BOTTOM: 12pt;
+	BACKGROUND-COLOR: #cccccc;
+	MARGIN: 12pt; =
+	PADDING-LEFT: 12pt;
+	PADDING-RIGHT: 12pt;
+	FONT-FAMILY: sans-serif,= 
+ verdana, helvetica;
+	COLOR: #003366;
+	FONT-SIZE: 11pt;
+	BORDER-TOP: #003366= 
+1px solid;
+	BORDER-RIGHT: #003366 1px solid;
+	PADDING-TOP: 12pt
+}
+
+LI {
+	MARGIN-LEFT: 11pt
+}
+
+.title {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: =
+	14pt
+}
+
+.copyright {
+	FONT-FAMILY: sans-serif, verdana, helvetica;
+	COLOR: #000000;
+	FONT-SIZE: =
+	10pt
+}
+
+.para {
+	TEXT-INDENT: 22pt
+}
+
+.note {
+	BORDER-BOTTOM: #000000 3px double;
+	BORDER-LEFT: #000000 3px double; =
+	PADDING-BOTTOM: 12pt;
+	MARGIN: 12pt;
+	PADDING-LEFT: 12pt;
+	PADDING-RIGHT: = 12pt;
+	FONT-SIZE: 11pt;
+	BORDER-TOP: #000000 3px double;
+	BORDER-RIGHT: = #000000 3px double;
+	PADDING-TOP: 12pt
+}
+
+A {
+	TEXT-DECORATION: none
+}
+
+A:link {
+	COLOR: ##6699cc
+}
+
+A:visited {
+	COLOR: #336699
+}
+
+A:active {
+	COLOR: #6699cc
+}
